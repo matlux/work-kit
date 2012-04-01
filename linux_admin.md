@@ -24,10 +24,13 @@ Edit the /etc/fstab file and add a line like:
     
  special for Git:  export https_proxy='https://user:pass@proxy:8080' 
  Special for wget: 
+
     export http_proxy=proxy:8080 
     wget --proxy-user=user --proxy-password='pass' http:/url2get/example-1.0.tar.gz 
  
- Special ruby gem:  export http_proxy='http://user:pass@proxy:8080' 
+ Special ruby gem:
+
+    export http_proxy='http://user:pass@proxy:8080' 
  
  Special Yum, edit yum.conf and add:
     
