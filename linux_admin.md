@@ -22,7 +22,10 @@ Edit the /etc/fstab file and add a line like:
 
 ## use of a proxy with various Unix applications or cygwin  
     
- special for Git:  export https_proxy='https://user:pass@proxy:8080' 
+ special for Git:
+
+    export https_proxy='https://user:pass@proxy:8080' 
+
  Special for wget: 
 
     export http_proxy=proxy:8080 
