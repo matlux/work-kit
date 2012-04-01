@@ -37,4 +37,4 @@ Edit the /etc/fstab file and add a line like:
 
 ## How to count the number of non-empty (lines not containing spaces only) non-commented lines (starting with hash sign #) on scripts and ruby
 
-   grep -v '^[[:space:]]*#' fileName.rb | grep -v '^[[:space:]]*$' | wc -l
+    grep -v '^[[:space:]]*#' fileName.rb | grep -v '^[[:space:]]*$' | wc -l
