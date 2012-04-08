@@ -41,3 +41,7 @@ Edit the /etc/fstab file and add a line like:
     proxy_username=user 
     proxy_password=pass
 
+## Add network route on linux
+
+    sudo route add -net 10.8.0.0 netmask 255.255.255.0 gw 192.168.77.17
+

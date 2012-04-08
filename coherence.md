@@ -105,3 +105,7 @@ RAM Pinning with mlockall package com.csg.dtacc.coherence.utils;
 	
 	
 Test Pof Fidelity
+	private void assertPofFidelity(Object example) {
+		ConfigurablePofContext cxt = new ConfigurablePofContext(POF_CONFIG_XML);
+		Binary binary = ExternalizableHelper.toBinary(example, cxt); Object result = ExternalizableHelper.fromBinary(binary, cxt);
+		assertEquals(example, result); }
