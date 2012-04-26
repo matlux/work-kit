@@ -45,3 +45,6 @@ Edit the /etc/fstab file and add a line like:
 
     sudo route add -net 10.8.0.0 netmask 255.255.255.0 gw 192.168.77.17
 
+## How to trace all systems call and file access on linux?
+
+    strace -f -o log [process2run] [args]
