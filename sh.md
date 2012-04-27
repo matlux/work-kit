@@ -18,7 +18,7 @@ Using a pipe within a find command
     grep -v '^[[:space:]]*#' fileName.rb | grep -v '^[[:space:]]*$' | wc -l
 
 
-## How to repeat a command
+## How to repeat a command & how to display process tree in real time for a given user on Linux a la 'ProcessExplorer'
 
     while x=0; do clear; ps faux [pid] | grep svcjvmrx; sleep 2; done
 

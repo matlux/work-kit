@@ -12,8 +12,8 @@
     wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p125.tar.gz
     tar xvfz ruby-1.9.3-p125.tar.gz
     cd ruby-1.9.3-p125
-    export LDFLAGS="-L/apps/dev_platform/lib/yaml/lib"
-    export CPPFLAGS="-I/apps/dev_platform/lib/yaml/include"
+    export LDFLAGS="-L/home/user/lib/yaml/lib"
+    export CPPFLAGS="-I/home/user/lib/yaml/include"
     ./configure -prefix=/home/user/local/ruby  
     CPUS="$(grep processor /proc/cpuinfo | wc -l)"
     make -j $CPUS
@@ -46,9 +46,8 @@ Yaml
 
 Openssl
 
-    export CXXFLAGS=-fPIC
-    export LDFLAGS="-L/apps/dev_platform/lib/yaml/lib -L/apps/dev_platform/zlib/lib -L/apps/dev_platform/openssl-1.0.1a/lib -fPIC"
-    export CPPFLAGS="-I/apps/dev_platform/lib/yaml/include -I/apps/dev_platform/zlib/include -I/apps/dev_platform/openssl-1.0.1a/include -fPIC"
+    export LDFLAGS="-L/apps/dev_platform/lib/yaml/lib -L/apps/dev_platform/zlib/lib -L/apps/dev_platform/openssl-1.0.1a/lib"
+    export CPPFLAGS="-I/apps/dev_platform/lib/yaml/include -I/apps/dev_platform/zlib/include -I/apps/dev_platform/openssl-1.0.1a/include"
     tar xvfz openssl-1.0.1a.tar.gz
     ./config --prefix=/apps/dev_platform/openssl-1.0.1a --shared
     make
