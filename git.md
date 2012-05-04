@@ -19,3 +19,8 @@
 ### Alias to display aliases
 
     git config --global alias.alias "config --get-regexp 'alias.*'"
+
+## add an ssh remote
+
+    git remote add origin ssh://user@host:1234/srv/git/example
+

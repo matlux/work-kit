@@ -33,4 +33,32 @@ Using a pipe within a find command
 
 ## How to delete a line of shell history
 
-     history -d [line_number]
+    history -d [line_number]
+
+## show PATH directory access rights, show they are accessible. useful for git
+
+    echo $PATH |tr ':' '\n' |xargs ls -ld
+
+## dos to unix:
+
+    sed 's/\r$//' dos.txt > unix.txt
+
+## unix to dos:
+
+    sed 's/$/\r/' unix.txt > dos.txt
+
+## monitor example
+
+    #!/bin/sh
+    while x=0; do
+      clear;  find . -name "*.log" | xargs ls -al;
+      md5sum ~/work/target/grid-webapp.war
+      md5sum ~/deploy/webapps/data-grid-webapp.war
+      echo grid log
+      tail --bytes=5120 ~/logs/grid.log
+      sleep 2
+    done
+
+## remove empty strings
+
+    cat afile.txt | grep -v "^$"
