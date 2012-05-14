@@ -62,3 +62,7 @@ Using a pipe within a find command
 ## remove empty strings
 
     cat afile.txt | grep -v "^$"
+
+## for example
+
+for i in {20..39}; do host=machine$i; echo $host; ssh $host ruby -v ; done

@@ -91,6 +91,11 @@ readline
 
     http://rubygems.org/gems/pocketknife 
 
+### pocketknife dependencies
+
+    gem install archive-tar-minitar --no-ri --no-rdoc
+    gem install rye --no-ri --no-rdoc
+
 ## Ruby Tips
 
 ### How to display load path

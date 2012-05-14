@@ -48,3 +48,11 @@ Edit the /etc/fstab file and add a line like:
 ## How to trace all systems call and file access on linux?
 
     strace -f -o log [process2run] [args]
+
+## ssh tuneling
+
+    ssh -L22222:localhost:222 remoteuser@remotehost
+
+screen
+
+disown
