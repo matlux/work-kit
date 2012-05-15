@@ -56,3 +56,7 @@ Edit the /etc/fstab file and add a line like:
 screen
 
 disown
+
+## find a port open by a process
+
+    lsof -i tcp:8000

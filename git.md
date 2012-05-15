@@ -24,3 +24,12 @@
 
     git remote add origin ssh://user@host:1234/srv/git/example
 
+
+## Viewing all `git diffs` with vimdiff
+
+    git config --global diff.tool vimdiff
+    git config --global difftool.prompt false
+    git config --global alias.d difftool
+
+Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the next file in the changeset. 
+
