@@ -33,3 +33,7 @@
 
 Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the next file in the changeset. 
 
+
+## good website on GIT
+
+    http://www-cs-students.stanford.edu/~blynn//gitmagic/ch07.html
