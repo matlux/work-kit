@@ -10,6 +10,21 @@
 
     git apply /tmp/test/wkit2.patch
 
+## more advanced patch
+
+be on the latest commit
+you want to patch from master to HEAD
+
+    git format-patch master
+  or
+    git format-patch master --stdout > filename.patch
+
+apply patch:
+
+    git apply --check filename.patch
+    git apply --stat filename.patch
+    git am --signoff < filename.patch
+
 ## Useful Aliases
 
 ### pimp your history display
