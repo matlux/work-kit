@@ -47,3 +47,10 @@
         This may be wanted after using :set ignorecase to make searches case insensitive.
 
     http://vim.wikia.com/wiki/Search_and_replace
+
+## install and use sshpass
+
+    tar xvfz /cygdrive/c/Users/UK879907/Downloads/sshpass-1.04.tar.gz
+    cd sshpass-1.04/
+    ./configure
+

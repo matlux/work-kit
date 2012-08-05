@@ -66,3 +66,29 @@ Using a pipe within a find command
 ## for example
 
 for i in {20..39}; do host=machine$i; echo $host; ssh $host ruby -v ; done
+
+## Display 2 arguments from ps with sed: (find pid and member name of a coherence cluster)
+
+    ps faux | grep -E '(user1|user2)' |  grep -v grep | grep 'tangosol' |  sed 's#[^ ]*[ ]*\([^ ]*\).*member=\([^ ]*\).*#\1 \2#'
+
+## awk example: find pid and member name of a coherence cluster
+
+file name: test.awk
+
+    {
+        printf($2 " ");
+        for(i=1; i<NF; ++i) {
+                if($i ~ /.*member=.*/) {
+                        split($i, tab, "=");
+                        print tab[2];
+                }
+        }
+    }
+
+call:
+
+    while x=0; do clear;  ps faux | grep -E '(svcjvmrx|14003old)' | grep -v grep | grep 'tangosol' | awk -f test.awk; sleep 2; done
+
+or simplified
+
+    ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk 
