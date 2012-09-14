@@ -60,3 +60,6 @@ disown
 ## find a port open by a process
 
     lsof -i tcp:8000
+
+    netstat -tulpn | grep 8000
+

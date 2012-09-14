@@ -92,3 +92,8 @@ call:
 or simplified
 
     ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk 
+
+## How to find a jar file containing a specific file
+
+    find . -name "*.jar" | xargs grep -n "engine.properties"
+

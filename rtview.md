@@ -11,11 +11,12 @@
     export JAVA_HOME=/tmp/deploy/jdk1.6.0_24
     export PATH=/tmp/deploy/jdk1.6.0_24/bin:$PATH
     . ./fixperms.sh
+    git commit -m ". ./fixperms.sh" -a
     ./rtvoc_setup.sh
+    git add rtvoc_info__.sh
     git commit -m "after running: ./rtvoc_setup.sh"
     cd conf/
     cp SampleCluster.properties UAT3.properties
-    git add rtvoc_info__.sh
     git add UAT3.properties
     git commit -m "added new cluster configuration: UAT3.properties"
     vim conf/UAT3.properties
@@ -101,5 +102,3 @@ ocm_setup.sh
     Unix_RunOCMDatabase.sh -bg
     startocm.sh
     apache-tomcat-6.0.18-sl/bin/startup.sh
-
-

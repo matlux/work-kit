@@ -54,3 +54,10 @@
     cd sshpass-1.04/
     ./configure
 
+## open multiple files at once with tabulations
+    
+    vim -p file1 file2 ...
+
+## how to change tabulation
+
+    g t
