@@ -73,7 +73,7 @@ Log Garbage Collections
 	
 	
 	
-How much uncommitted physical memory do you need on a server?
+## How much uncommitted physical memory do you need on a server?
 • Swapping is extremely bad news.
 • The most likely time to notice pages
 swapped out is during GC
@@ -92,6 +92,9 @@ RAM Pinning with mlockall • mlockall : standard C library function
 • Requires the memlock user limit to be set in /etc/security/limits.conf
 • Can be called via JNA
 
+
+    
+    
 RAM Pinning with mlockall package com.csg.dtacc.coherence.utils;
 	import com.sun.jna.Library; import com.sun.jna.Native;
 	public class MemLock {
@@ -108,4 +111,37 @@ Test Pof Fidelity
 	private void assertPofFidelity(Object example) {
 		ConfigurablePofContext cxt = new ConfigurablePofContext(POF_CONFIG_XML);
 		Binary binary = ExternalizableHelper.toBinary(example, cxt); Object result = ExternalizableHelper.fromBinary(binary, cxt);
-		assertEquals(example, result); }
+		assertEquals(example, result);
+		// or
+		// assertTrue(EqualsBuilder.reflectionEquals(example, result)); // apache common-lang convenience
+		}
+		
+		
+## What happens when an Exception is thrown?
+
+### in entryProcessor.process()
+
+    after  3.7.1.0
+    it rolls back
+    and get PortableException or WrapperException
+    getcause() will contain the exception it is extending PortableException otherwise you get a generic exception
+    
+    !! 3.7.1.0 it goes to the backup node !!  (bug)
+    
+ in entryProcessor.process()
+Map result = cache.invokeAll(keyset, entryProcessor);
+rollback partition and wont execute partition that have not finished
+
+in filter.evaluate()
+  Set result = cache.entrySet(filter);
+in entryProcessor.process() or filter.evaluate()
+    Map result = cache.invokeAll(filter, entryProcessor);
+    it's undeterministic
+
+    
+    
+## Write-behind
+
+### threading
+
+### remove does not write behind
