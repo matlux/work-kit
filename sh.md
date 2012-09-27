@@ -30,6 +30,10 @@ Using a pipe within a find command
 
     du -h ./ | grep -E "(([[:digit:]]{3}M{1})|(G{1}))[[:space:]]"
 
+## How to do a recursive grep with color
+
+    grep -rni --color=always error /tmp/data/logs/*
+
 
 ## How to delete a line of shell history
 

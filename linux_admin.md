@@ -63,3 +63,6 @@ disown
 
     netstat -tulpn | grep 8000
 
+## How to change keyboard layout from command line
+
+    setxkbmap gb

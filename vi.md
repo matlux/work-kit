@@ -21,7 +21,11 @@
 
     Vi –d file1 file2
 
-## Column resize
+### change window
+
+    ctrl-w  then arrow
+
+### Column resize
     10 ctrl-w < or >
 
 ## Xml indentation
