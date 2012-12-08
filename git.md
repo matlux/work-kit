@@ -48,6 +48,13 @@ apply patch:
 
 Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the next file in the changeset. 
 
+## How to display changed files on a commit
+
+    git show --pretty="format:" --name-only bd61ad98
+
+    git diff-tree --name-only -r <commit-ish>
+
+    git ls-tree --name-only -r <commit-ish>
 
 ## good website on GIT
 

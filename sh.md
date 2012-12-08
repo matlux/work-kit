@@ -101,3 +101,7 @@ or simplified
 
     find . -name "*.jar" | xargs grep -n "engine.properties"
 
+## How to sort folders by size
+
+    du -h | sort -n
+    ls -lSh

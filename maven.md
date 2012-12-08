@@ -1,14 +1,26 @@
 
-# Maven's cheat cheat
+# Mavens cheat cheat
 
 ## How to get sources and documentation attached to Eclipse for Maven Dependencies
 
     mvn eclipse:eclipse -DdownloadSources -DdownloadJavadocs
 
+or
+
+    mvn -Declipse.downloadSources=true eclipse:eclipse
+
 
 ## How to debug Maven tests 
 
     mvn test -Dmaven.surefire.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9000 -Xnoagent -Djava.compiler=NONE"
+
+## How to debug Maven plugins
+
+on windows
+    set MAVEN_OPTS=-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1234
+
+on linux
+    export MAVEN_OPTS="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1234"
 
 
 ## How to retrieve nexus artifact with wget
@@ -33,3 +45,21 @@ There is an alternate form of the API that uses redirects to work around the con
 
 wget "http://repository.sonatype.org/service/local/artifact/maven/redirect?
 r=snapshots&g=org.sonatype.nexus&a=nexus-utils&v=LATEST"
+
+## Display dependency tree
+
+mvn dependency:tree
+
+## How to display active profiles
+
+   mvn help:active-profiles
+
+
+## How to use a profile
+
+    mvn -P profile1,profile2
+
+## How to disable a profile
+
+    mvn -P !profile1,!profile2
+
