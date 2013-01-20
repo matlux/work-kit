@@ -91,11 +91,15 @@ file name: test.awk
 
 call:
 
-    while x=0; do clear;  ps faux | grep -E '(svcjvmrx|14003old)' | grep -v grep | grep 'tangosol' | awk -f test.awk; sleep 2; done
+    while x=0; do clear;  ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk; sleep 2; done
 
 or simplified
 
     ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk 
+
+## How to see processes belonging to a couple of users
+
+    while x=0; do clear; ps faux | grep -E '(user1|user2)'; sleep 2; done
 
 ## How to find a jar file containing a specific file
 

@@ -56,6 +56,36 @@ Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the nex
 
     git ls-tree --name-only -r <commit-ish>
 
+## SVN git stuff
+
+### Import Straight from the SVN repo
+
+First, we need to fetch a copy of the repository.
+
+    git svn clone -s -r 40000:HEAD https://svn.parrot.org/parrot # choose some recent-ish commit
+
+note: it is assumed /trunk at the end of the url because of the -s parameter.
+
+## After you've made however many commits, you can push up to the svn server with:
+
+    git svn dcommit
+
+### That will also bring your local tree up to date. To bring your tree up to date in general, run:
+
+    git svn rebase
+
+This will update your local checkout and then re-apply your local un-submitted commits on top of the new trunk.
+
+### update your local repo history with new commits coming from the SVN server
+
+    git svn fetch
+
+### How to display svn revision in your git/svn repo?
+
+    git log -z | tr '\n\0' ' \n' | sed 's/\(commit \S*\) .*git-svn-id: svn:[^@]*@\([0-9]*\) .*/\1 r\2/'
+
 ## good website on GIT
 
     http://www-cs-students.stanford.edu/~blynn//gitmagic/ch07.html
+
+    http://trac.parrot.org/parrot/wiki/git-svn-tutorial

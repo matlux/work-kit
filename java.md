@@ -20,3 +20,14 @@
 	            for (StackTraceElement stackTraceElement : stackTrace) {
 					LOG.error(">> " + stackTraceElement.toString());
 				}
+
+## Usefull Snippets
+
+### Display Stack
+
+    StringBuilder stack = new StringBuilder();
+    for (StackTraceElement st :Thread.currentThread().getStackTrace()) {
+    	stack.append(st.toString()).append("\n");
+    }
+    LOG.info("stack:\n " + stack.toString());
+
