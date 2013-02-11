@@ -63,3 +63,6 @@ mvn dependency:tree
 
     mvn -P !profile1,!profile2
 
+## How to skip tests
+
+    mvn install -DskipTests

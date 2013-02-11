@@ -25,6 +25,10 @@ apply patch:
     git apply --stat filename.patch
     git am --signoff < filename.patch
 
+## apply patch which do not match
+
+    git am --ignore-space-change < test.patch
+
 ## Useful Aliases
 
 ### pimp your history display
