@@ -145,3 +145,13 @@ in entryProcessor.process() or filter.evaluate()
 ### threading
 
 ### remove does not write behind
+
+
+## Coherence Key Howto
+
+### equals and hashCode need to be implemented correctly for any type used as a key
+
+### All serializable (non transient) fields in the key class must be used in the equals implementation
+
+See [this blog](http://blackbeanbag.net/wp/2010/06/06/coherence-key-howto/) and [this blog](http://codefhtagn.blogspot.co.uk/2010/09/coherence-when-key-is-not-whole-key.html)
+
