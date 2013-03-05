@@ -93,3 +93,8 @@ This will update your local checkout and then re-apply your local un-submitted c
     http://www-cs-students.stanford.edu/~blynn//gitmagic/ch07.html
 
     http://trac.parrot.org/parrot/wiki/git-svn-tutorial
+
+## How to start a git daemon
+
+    git daemon --verbose --base-path=/cygdrive/d/java/
+
