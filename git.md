@@ -98,3 +98,19 @@ This will update your local checkout and then re-apply your local un-submitted c
 
     git daemon --verbose --base-path=/cygdrive/d/java/
 
+
+## How to get a file from a specific version
+
+for a list of files
+
+    git show <treeish>
+
+for a file in particular
+
+    git show <treeish>:<file>
+
+So let’s say we want to go back four commits from our current HEAD, and we want the index.html file.
+
+    git show HEAD~4:index.html
+
+

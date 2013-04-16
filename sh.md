@@ -13,6 +13,10 @@ Using a pipe within a find command
     find *.JPG -type f -exec sh -c 'file "$1" | grep -v JPEG' pipo {} \;
     find *.jpg -type f -exec sh -c 'file "$1" | grep -v JPEG' pipo {} \;
 
+## How to find multiple files at the same time
+
+    find . \( -name \*foo\* -o -name \*bar\* \)
+
 ## How to count the number of non-empty (lines not containing spaces only) non-commented lines (starting with hash sign #) on scripts and ruby
 
     grep -v '^[[:space:]]*#' fileName.rb | grep -v '^[[:space:]]*$' | wc -l

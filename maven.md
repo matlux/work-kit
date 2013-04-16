@@ -50,6 +50,10 @@ r=snapshots&g=org.sonatype.nexus&a=nexus-utils&v=LATEST"
 
 mvn dependency:tree
 
+## How to display all profiles
+
+   mvn help:all-profiles
+
 ## How to display active profiles
 
    mvn help:active-profiles
