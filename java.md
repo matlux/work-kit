@@ -31,3 +31,61 @@
     }
     LOG.info("stack:\n " + stack.toString());
 
+### Harmcrest quick example
+
+```java
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.isIn;
+import static org.junit.Assert.assertThat;
+import static org.junit.internal.matchers.IsCollectionContaining.hasItem;
+
+
+assertThat(result, is(expectedResult));
+assertThat(nbNodes, is(greaterThan(1)));
+assertThat(result, is(notNullValue()));
+assertThat(item, isIn(collection));
+assertThat(collection, hasItem(item));
+
+
+```
+
+### Mockito quick example
+
+```java
+import org.mockito.Mockito;
+
+MyClass mock = Mockito.mock(MyClass.class);
+Mockito.stub(mock.getMethod()).toReturn(i);
+```
+
+### Executor quick example
+
+
+```java
+        ExecutorService executor= Executors.newFixedThreadPool(10);
+        Callable task = new Callable<Object>() {
+
+            @Override
+            public Object call() throws Exception {
+                System.out.println("Hello world");
+                return true;
+
+            }
+        };
+
+        List<Future<Boolean>> futures = new ArrayList<Future<Boolean>>(10);
+        for(int i=0 ;i<10 ; i++) {
+            futures.add(executor.submit(task));
+        }
+        System.out.println("waiting");
+        for(int i=0 ;i<10 ; i++) {
+            Assert.assertTrue(futures.get(i).get());
+        }
+        //executor.shutdown();
+        //executor.awaitTermination(1,TimeUnit.HOURS);
+
+        System.out.println("bye");
+```
