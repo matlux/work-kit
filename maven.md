@@ -70,3 +70,29 @@ mvn dependency:tree
 ## How to skip tests
 
     mvn install -DskipTests
+
+## How to start one test
+
+    mvn clean integration-test -Dit.test=NewTest
+
+## How to pass parameters from teamcity to maven via profile
+
+    mvn clean install -Pdeploy-artifacts -P%conf.DEPLOY_ENV%
+
+or
+
+    mvn clean install -Dmyapp.url=http://host1:4280/
+
+then add something like this to pom:
+
+```xml
+    <properties>
+        <myapp.url>http://hostdefault:8080/</myapp.url>
+        <in-or-out-process.arg>-Dtest.type=out-process</in-or-out-process.arg>
+        <exclude.some.tests>**/none*</exclude.some.tests>
+        <soaktest.test>false</soaktest.test>
+    </properties>
+
+```
+
+
