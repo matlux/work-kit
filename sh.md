@@ -113,3 +113,20 @@ or simplified
 
     du -h | sort -n
     ls -lSh
+
+
+## How to find files created on a specific date
+
+Example: To find all files modified on the 7th of June, 2006:
+
+    find . -type f -newermt 2007-06-07 ! -newermt 2007-06-08
+
+To find all files accessed on the 29th of september, 2008:
+
+    find . -type f -newerat 2008-09-29 ! -newerat 2008-09-30
+
+Or, files which had their permission changed on the same day:
+
+    find . -type f -newerct 2008-09-29 ! -newerct 2008-09-30
+
+If you don't change permissions on the file, 'c' would normally correspond to the creation date, thoug
