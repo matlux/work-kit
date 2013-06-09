@@ -76,10 +76,10 @@ Log Garbage Collections
 ## How much uncommitted physical memory do you need on a server?
 • Swapping is extremely bad news.
 • The most likely time to notice pages
-swapped out is during GC
+• swapped out is during GC
 • Some UNIX sysadmins standardise backup or monitoring tools that gobble up huge amounts of memory when they run.
-￼
-￼Can we prevent swapping?
+
+• Can we prevent swapping?
 • Leave lots of OS memory uncommitted. How much?
 • Swappiness
 • Huge pages
@@ -155,3 +155,36 @@ in entryProcessor.process() or filter.evaluate()
 
 See [this blog](http://blackbeanbag.net/wp/2010/06/06/coherence-key-howto/) and [this blog](http://codefhtagn.blogspot.co.uk/2010/09/coherence-when-key-is-not-whole-key.html)
 
+## 21 March 2013 Coherence SIG
+new version 3.7.1.8
+
+cohrence.oracle.com/display/CSIG
+
+### Elastic Data
+
+Local cAche
+    in memory binary map
+    eviction/expiry support
+    
+External Scheme
+    BDB
+    NIO
+    LH (avoid its use!)
+    
+Local Cache limitations:
+    allocation made on heap
+    high storage in backing map == large heap
+    unable to isolate
+    
+Elastic Data objectives
+    both ram and disk
+    retain keys in memory
+    journaling - append aonly
+    Overflow from RAM to disk
+    big data - 
+    
+History
+    introduced in 3.7
+    3.7.1 exalogic perormance enhancements
+    12.1.2 minor changes
+    
