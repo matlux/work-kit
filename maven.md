@@ -95,4 +95,20 @@ then add something like this to pom:
 
 ```
 
+## How to deploy files to Nexus
+
+```bash
+mvn deploy:deploy-file -DpomFile=fleet-0.9.5.pom -DrepositoryId=myrepo-releases -Durl=http://hostname/nexus/content/repositories/myrepo-releases -Dfile=fleet-0.9.5.jar
+```
+
+
+```bash
+mvn deploy:deploy-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 -Dpackaging=jar -DrepositoryId=myrepo-releases -Durl=http://hostname/nexus/content/repositories/myrepo-releases -Dfile=clj-http-0.4.1.jar
+```
+
+## How to deploy files to local repo
+
+```bash
+mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 -Dpackaging=jar -Dfile=clj-http-0.4.1.jar
+```
 
