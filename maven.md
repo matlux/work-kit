@@ -25,7 +25,7 @@ on linux
 
 ## How to retrieve nexus artifact with wget
 
-    http://parsl1113139.fr.net.intra:8000/nexus/service/local/artifact/maven/content?r=public-snapshots&g=com.bnpparibas.risk.re.services&a=calculation-engine-services&v=LATEST&c=war
+    http://nexus-host:8000/nexus/service/local/artifact/maven/content?r=public-snapshots&g=net.matlux&a=engine-services&v=LATEST&c=war
 
     wget "http://repository.sonatype.org/service/local/artifact/maven/content?
 r=snapshots&g=org.sonatype.nexus&a=nexus-utils&v=LATEST" --content-disposition
@@ -46,17 +46,21 @@ There is an alternate form of the API that uses redirects to work around the con
 wget "http://repository.sonatype.org/service/local/artifact/maven/redirect?
 r=snapshots&g=org.sonatype.nexus&a=nexus-utils&v=LATEST"
 
+example of how to retrieve tomcat:
+
+    wget http://nexus-host/nexus/service/local/repo_groups/releases/content/net/matlux/packages/tomcat-runtime/unity-tomcat-runtime-assembly/7.32/unity-tomcat-runtime-assembly-7.32-package.tar.gz
+
 ## Display dependency tree
 
-mvn dependency:tree
+    mvn dependency:tree
 
 ## How to display all profiles
 
-   mvn help:all-profiles
+    mvn help:all-profiles
 
 ## How to display active profiles
 
-   mvn help:active-profiles
+    mvn help:active-profiles
 
 
 ## How to use a profile
@@ -95,4 +99,20 @@ then add something like this to pom:
 
 ```
 
+## How to deploy files to Nexus
+
+```bash
+mvn deploy:deploy-file -DpomFile=fleet-0.9.5.pom -DrepositoryId=myrepo-releases -Durl=http://hostname/nexus/content/repositories/myrepo-releases -Dfile=fleet-0.9.5.jar
+```
+
+
+```bash
+mvn deploy:deploy-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 -Dpackaging=jar -DrepositoryId=myrepo-releases -Durl=http://hostname/nexus/content/repositories/myrepo-releases -Dfile=clj-http-0.4.1.jar
+```
+
+## How to deploy files to local repo
+
+```bash
+mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 -Dpackaging=jar -Dfile=clj-http-0.4.1.jar
+```
 
