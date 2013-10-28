@@ -130,3 +130,14 @@ Or, files which had their permission changed on the same day:
     find . -type f -newerct 2008-09-29 ! -newerct 2008-09-30
 
 If you don't change permissions on the file, 'c' would normally correspond to the creation date, thoug
+
+## How to run commands on a remote server with SSH
+
+```shell
+   !/bin/sh
+   ssh -o PreferredAuthentications=publickey brjones@server.com << EOT
+   cd ~/folder
+   echo "hello" > hello.txt
+   ...
+   EOT
+```
