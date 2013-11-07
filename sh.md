@@ -138,3 +138,13 @@ If you don't change permissions on the file, 'c' would normally correspond to th
     od -tx1 -tc name-of-the-file.txt
 
 
+## How to run commands on a remote server with SSH
+
+```shell
+   !/bin/sh
+   ssh -o PreferredAuthentications=publickey brjones@server.com << EOT
+   cd ~/folder
+   echo "hello" > hello.txt
+   ...
+   EOT
+```

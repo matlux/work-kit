@@ -116,3 +116,7 @@ mvn deploy:deploy-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 
 mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.1 -Dpackaging=jar -Dfile=clj-http-0.4.1.jar
 ```
 
+## How to resume from with maven
+
+    mvn clean install -rf :my-last-module
+

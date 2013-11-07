@@ -12,3 +12,7 @@
 
     svn log -q | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq
 
+
+## How to list all svn:externals recursively
+
+    svn propget svn:externals -R

@@ -24,4 +24,7 @@ goto "Build Parameters" -> "Add new parameter"
     Type = Password
 
 
+## How to change a TC build number during a build
+
+    echo "##teamcity[buildNumber '1.0.$BUILD_NUMBER']"
 
