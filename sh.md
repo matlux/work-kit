@@ -130,3 +130,11 @@ Or, files which had their permission changed on the same day:
     find . -type f -newerct 2008-09-29 ! -newerct 2008-09-30
 
 If you don't change permissions on the file, 'c' would normally correspond to the creation date, thoug
+
+
+
+## How to display file in hexadecimal and characters
+
+    od -tx1 -tc name-of-the-file.txt
+
+

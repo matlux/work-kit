@@ -53,6 +53,10 @@ Edit the /etc/fstab file and add a line like:
 
     ssh -L22222:localhost:222 remoteuser@remotehost
 
+## How to change ssh key passphrase
+
+    ssh-keygen -p -f ~/.ssh/id_rsa
+
 screen
 
 disown
@@ -66,3 +70,11 @@ disown
 ## How to change keyboard layout from command line
 
     setxkbmap gb
+
+## add a user with useradd
+
+    sudo useradd --uid 3395 --gid users -d /home/joeblog joeblog
+
+## add a user with adduser (higher level command interactive)
+
+    adduser joeblog
