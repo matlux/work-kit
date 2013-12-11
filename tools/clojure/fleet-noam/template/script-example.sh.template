@@ -1,0 +1,19 @@
+**************
+LINUX
+************** \ this is a test for backslashes \ \ 
+rm -rf /tmp/tmpdeploy
+mkdir -p /tmp/tmpdeploy
+cd /tmp/tmpdeploy
+wget http://machine1:8080/BUILD-ARTIFACTS/system-<(str env)>/system-deploy-pack.zip
+unzip system-deploy-pack.zip
+export TMP_DEPLOY_TOOLS=/tmp/tmpdeploy
+cd $TMP_DEPLOY_TOOLS
+cd $TMP_DEPLOY_TOOLS/tools/lifecycle
+cd /app/deploy/system-deployment/tools/lifecycle
+cd $TMP_DEPLOY_TOOLS/tools/lifecycle
+ant -f start-services-linux.xml -Denvironment=dr-gb -Drevision=-<(? :revision)> stop-all
+rm -rf /data/logs/*
+cd $TMP_DEPLOY_TOOLS/tools/install-app
+cd $TMP_DEPLOY_TOOLS/tools/install-app
+ant -f install-system-linux-all.xml -Denvironment=<(? :env)> -Drevision=system-<(? :revision)> deploy
+ 

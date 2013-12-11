@@ -1,0 +1,17 @@
+ JIRA-1144 - Enable MySystem proc monitoring for DEVTEAM
+JIRA-1145 - improve runtime verify.
+JIRA-1145 - improve runtime verify.
+ JIRA-1144 - Enable MySystem proc monitoring for DEVTEAM
+ JIRA-1135 - Monitoring Server for MySystem Systems
+ JIRA-1135 - Monitoring Server for MySystem Systems
+JIRA-1145 - improve runtime verify.
+JIRA-1147 - Have to take the result limit into account.
+JIRA-1146 - add access to DSL code
+JIRA-1147 - Have to take the result limit into account.
+JIRA-1147 - Have to take the result limit into account.
+JIRA-1119 Adding DataSource2 that uses new Source interface
+JIRA-991 Updated tests stability.
+JIRA-1148 Upgrading interface in CoordinatedSource and bugfixing its parameters
+[JIRA-1142] first cut commit for adding the MySystem monitoring views to MySystem2-web-adapter
+[JIRA-1142] correct number of procs in SystemView
+[JIRA-1142] handle reset in SetListener
