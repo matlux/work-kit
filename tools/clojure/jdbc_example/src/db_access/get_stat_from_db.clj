@@ -124,7 +124,7 @@
 
 (defn queryredeploy [last-session] (str "select s.create_time,s.insert_seq
 from
-                SYZYGY.SESSION_HISTORY s
+                MYPROJECT.SESSION_HISTORY s
 where                      s.app_name = 'MYAPP'
 and                        s.session_id = 1
 and                        s.insert_seq > " last-session "
@@ -137,7 +137,7 @@ order by s.insert_seq
         to* (if (nil? to) "to_date('01-jan-2999')" to)] 
     (str "select 'session' as data,s.CREATE_TIME,s.session_id, s.session_name, s.insert_seq
 from
-                SYZYGY.SESSION_HISTORY s
+                MYPROJECT.SESSION_HISTORY s
 where                      s.app_name = 'MYAPP'
 and                        s.CREATE_TIME >= " from* "
 and                        s.CREATE_TIME < " to* "
@@ -150,7 +150,7 @@ order by s.insert_seq
         to* (if (nil? to) "to_date('01-jan-2999')" to)] 
     (str "select 'session' as data,s.CREATE_TIME, s.SESSION_ID, s.SESSION_NAME, s.APP_NAME, s.PRIORITY, s.SESSION_STATE, s.NUM_TASK_PENDING, s.NUM_TASK_RUNNING, s.NUM_TASK_DONE, s.NUM_TASK_ERROR, s.NUM_TASK_CANCELED, s.SERVICE_INSTANCES, s.REASON, s.END_TIME, s.SESSION_TYPE, s.LAST_ERROR_TIME, s.SERVICE, s.TOTAL_UNSUCCESS_TASKRUNS, s.TOTAL_UNSUCCESS_TASKSRUNTIME, s.TOTAL_TASKS_RUNTIME, s.TOTAL_INPUT_SIZE, s.TOTAL_OUTPUT_SIZE, s.TOTAL_TASKS_SUBMIT2START_TIME, s.SESSION_TAG, s.CLIENT_HOST_NAME, s.insert_seq
 from
-                SYZYGY.SESSION_HISTORY s
+                MYPROJECT.SESSION_HISTORY s
 where                      s.app_name = 'MYAPP'
 and                        s.CREATE_TIME >= " from* "
 and                        s.CREATE_TIME < " to* "
@@ -168,7 +168,7 @@ where ROWNUM <= " n ""))
   (let [from* (if (nil? from) "to_date('01-jan-1999')" from)
         to* (if (nil? to) "to_date('01-jan-2999')" to)] 
     (str "select 'task' as data,s.CREATE_TIME as st,t.submit_time,s.session_id, s.session_name, s.insert_seq as sseq, t.TASK_ID, t.insert_seq as taskseq, TO_NUMBER(TO_CHAR(t.END_TIME, 'SSSSS')) - TO_NUMBER(TO_CHAR(t.START_TIME, 'SSSSS')) + (TO_NUMBER(TO_CHAR(t.END_TIME, 'FF')) - TO_NUMBER(TO_CHAR(t.START_TIME, 'FF')))/1e6 as task_diff
-from       SYZYGY.TASK_ATTRIBUTES t, SYZYGY.SESSION_HISTORY s
+from       MYPROJECT.TASK_ATTRIBUTES t, MYPROJECT.SESSION_HISTORY s
 where                      t.app_name = 'MYAPP'
 and                        t.app_name = s.app_name
 and                        t.cluster_name = s.cluster_name
@@ -185,7 +185,7 @@ order by t.submit_time ")))
   (let [from* (if (nil? from) "to_date('01-jan-1999')" from)
         to* (if (nil? to) "to_date('01-jan-2999')" to)] 
     (str "select 'task' as data,s.SESSION_NAME, s.SESSION_TYPE, s.SERVICE, s.SESSION_TAG, s.CLIENT_HOST_NAME, t.TASK_ID, t.SESSION_ID, t.APP_NAME, t.TASK_STATE, t.SUBMIT_TIME, t.START_TIME, t.END_TIME, t.EXEC_HOST, t.INPUT_SIZE, t.OUTPUT_SIZE, t.SERVICE_PID, t.RERUN_COUNT, t.TASK_TAG, t.LAST_FAILURE_REASON, t.INPUT_COMPRESSED, t.OUTPUT_COMPRESSED, TO_NUMBER(TO_CHAR(t.END_TIME, 'SSSSS')) - TO_NUMBER(TO_CHAR(t.START_TIME, 'SSSSS')) + (TO_NUMBER(TO_CHAR(t.END_TIME, 'FF')) - TO_NUMBER(TO_CHAR(t.START_TIME, 'FF')))/1e6 as task_diff
-from       SYZYGY.TASK_ATTRIBUTES t, SYZYGY.SESSION_HISTORY s
+from       MYPROJECT.TASK_ATTRIBUTES t, MYPROJECT.SESSION_HISTORY s
 where                      t.app_name = 'MYAPP'
 and                        t.app_name = s.app_name
 and                        t.cluster_name = s.cluster_name

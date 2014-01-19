@@ -1,0 +1,8 @@
+the title is <(str title)>.
+*<(raw "\\Buy 13\" laptop!")>
+*<(->> node :tomcat :port)>
+
+ <(for [tag (node :wars)]
+    (str tag)
+  )>
+end
