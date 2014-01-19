@@ -100,3 +100,7 @@ ANSI_COLOR="1;31"
 HOME_URL="skipped"
 SUPPORT_URL="skipped"
 BUG_REPORT_URL="skipped"
+-----------
+
+found under:
+http://forums.fedoraforum.org/showthread.php?p=1438188#post1438188
