@@ -1,4 +1,3 @@
-
 ## mount samba share from linux
 
  Prerequisite:
@@ -40,6 +39,12 @@ Edit the /etc/fstab file and add a line like:
     proxy=http://proxy:8080 
     proxy_username=user 
     proxy_password=pass
+
+ Special leinengen
+ 
+    export HTTP_PROXY=http://user:pass@proxy:8080
+    export HTTPS_PROXY=https://user:pass@proxy:8080
+    
 
 ## Add network route on linux
 
