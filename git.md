@@ -113,4 +113,8 @@ So let’s say we want to go back four commits from our current HEAD, and we wan
 
     git show HEAD~4:index.html
 
+## How to push a new local branch to remote repo and track it too
 
+    $ git checkout -b mynewfeature
+    ... edit files, add and commit ...
+    $ git push -u origin mynewfeature
