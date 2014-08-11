@@ -136,12 +136,12 @@ trait Function1[-P, +R] {
 
 Notice the "-" variance annotation on the P type parameter. This declaration as a whole means that Function1 is contravariant in P and covariant in R. Thus, we can derive the following axioms:
 
-```
+```scala
 T1' <: T1
 T2 <: T2'
 ---------------------------------------- S-Fun
 Function1[T1, T2] <: Function1[T1', T2']
-```scala
+```
 
 Notice that T1' must be a subtype (or the same type) of T1, whereas it is the opposite for T2 and T2'. In English, this can be read as the following:
 
