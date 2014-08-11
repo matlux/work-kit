@@ -1,6 +1,6 @@
 
 ## How do scala traits differ from java interfaces?
-Traits are interfaces that can provide concrete members.
+Unlike Java interfaces, Scala traits can include code, which effectively gives the ability to do multiple inheritance.
 
 
 ## what are the differences between an abstract class and trait
