@@ -10,12 +10,12 @@ Abstract classes are fully interoperable with Java. You can call them from Java 
 ## What is the difference between a Class and a Case Class?
 Case classes can be seen as plain and immutable data-holding objects that should exclusively depend on their constructor arguments.
 
-This functional concept allows us to
+This functional concept allows us to:
 
-use a compact initialisation syntax (Node(1, Leaf(2), None)))
-decompose them using pattern matching
-have equality comparisons implicitly defined
-In combination with inheritance, case classes are used to mimic algebraic datatypes.
+* use a compact initialisation syntax `(Node(1, Leaf(2), None)))`
+* decompose them using pattern matching
+* have equality comparisons implicitly defined
+* In combination with inheritance, case classes are used to mimic algebraic datatypes.
 
 If an object performs statefull computations on the inside or exhibits other kinds of complex behaviour, it should be an ordinary class.
 
@@ -28,30 +28,29 @@ If an object performs statefull computations on the inside or exhibits other kin
 ```scala
 class test {
     //anonymous/lambda expression
-    (x:Int) => x+3                            //> res0: Int => Int = <function1>
+    (x:Int) => x+3           
 
-    def m1(x:Int) = x+3                           //> m1: (x: Int)Int
+    def m1(x:Int) = x+3
     //without_type_inference
-    def m1b(x:Int) : Int = x+3                    //> m1b: (x: Int)Int
-    val f1 = (x:Int) => x+3                       //> f1  : Int => Int = <function1>
+    def m1b(x:Int) : Int = x+3
+    val f1 = (x:Int) => x+3
     //without_type_inference
-    val f1b : (Int) => Int = (x:Int) => x+3       //> f1b  : Int => Int = <function1>
+    val f1b : (Int) => Int = (x:Int) => x+3
     //with Function1
     val f1c = new Function1[Int,Int]{
     	def apply(x:Int) = x+3
-    }                                             //> f1c  : Int => Int = <function1>
+    }
     //without_type_inference
     val f1d : (Int) => Int = new Function1[Int,Int]{
     	def apply(x:Int) = x+3
-    }                                             //> f1d  : Int => Int = <function1>
-    //explicite class declaration
+
     class myfunc extends Function1[Int,Int] {
           def apply(x:Int) = x+3
     }
-    val f1e = new myfunc                          //> f1e  : matlux.interviewquestions.functions.myfunc = <function1>
+    val f1e = new myfunc
     
     // method to function conversion
-    val f2 = m1 _                                 //> f2  : Int => Int = <function1>
+    val f2 = m1 _
 
 }
 ```
