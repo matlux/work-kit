@@ -281,8 +281,65 @@ or in Clojure
 
 ## Reactive Design
 
+https://github.com/ReactiveX/RxJava/wiki/Async-Operators
 
+## start( )
+
+create an Observable that emits the return value of a function
+
+## toAsync( ) or asyncAction( ) or asyncFunc( )
+
+convert a function into an Observable that executes the function and emits its return value
+
+## startFuture( )
+
+convert a function that returns Future into an Observable that emits that Future's return value
 
 ## StringBuilder vs StringBuffer ?
 
 `StringBuffer` is synchronized, `StringBuilder` is not.
+
+
+## Java 8
+
+### Example
+
+```java
+//Old way:
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+for(Integer n: list) {
+    System.out.println(n);
+}
+ 
+//New way:
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+list.forEach(n -> System.out.println(n));
+ 
+ 
+//or we can use :: double colon operator in Java 8
+list.forEach(System.out::println);
+```
+
+### Stream Example
+
+```java
+//Old way:
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+int sum = 0;
+for(Integer n : list) {
+    int x = n * n;
+    sum = sum + x;
+}
+System.out.println(sum);
+ 
+//New way:
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+int sum = list.stream().map(x -> x*x).reduce((x,y) -> x + y).get();
+System.out.println(sum);
+```
+
+### Difference between Lambda Expression and Anonymous class
+One key difference between using Anonymous class and Lambda expression is the use of this keyword. For anonymous class ‘this’ keyword resolves to anonymous class, whereas for lambda expression ‘this’ keyword resolves to enclosing class where lambda is written.
+
+Another difference between lambda expression and anonymous class is in the way these two are compiled. Java compiler compiles lambda expressions and convert them into private method of the class. It uses invokedynamic instruction that was added in Java 7 to bind this method dynamically. Tal Weiss has written a good blog on how Java compiles the lambda expressions into bytecode.
+
