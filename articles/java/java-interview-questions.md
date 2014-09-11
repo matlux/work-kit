@@ -299,6 +299,12 @@ convert a function that returns Future into an Observable that emits that Future
 
 `StringBuffer` is synchronized, `StringBuilder` is not.
 
+## Your using purely immutable objects. Is it not going to create pressure on the garbage collection?
+
+Is Escape analysis turned on?
+
+http://nerds-central.blogspot.co.uk/2012/04/deep-dive-java-performance-and-escape.html
+
 
 ## Java 8
 
