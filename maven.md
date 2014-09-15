@@ -120,3 +120,6 @@ mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.
 
     mvn clean install -rf :my-last-module
 
+## How to generate a new jar project from commandline
+
+    mvn archetype:generate -DgroupId={project-packaging} -DartifactId={project-name} -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
