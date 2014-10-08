@@ -201,3 +201,166 @@ Precedence Rules
 * / %
 (all other special characters)
 
+## Week3
+
+### Class Hierachies
+
+Abstract classes can contain methods that are not defined.
+
+
+Mini implementation of a Persistent data structure:
+```scala
+abstract class IntSet {
+  def incl(x: Int): IntSet
+  def contains(x: Int): Boolean
+}
+
+class Empty extends IntSet {
+  def contains(x: Int): Boolean = false
+  def incl(x: Int): IntSet = new NonEmpty(x,new Empty, new Empty)
+}
+
+class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet{
+  def incl(x: Int): IntSet =
+    if (x < elem) new NonEmpty(elem, left incl x, right)
+    else if (x > elem) new NonEmpty(elem, left, right incl x)
+    else this
+  def contains(x: Int): Boolean =
+    if (x < elem) left contains x
+    else if (x > elem) right contains x
+    else true
+}
+```
+
+
+Classes can override the methods in their base classes (use override modifier) :
+```scala
+abstract class Base {
+  def foo = 1
+  def bar: Int
+}
+
+class Sub extends Base {
+  override def foo = 2
+  def bar = 3
+}
+```
+
+#### Dynamic Binding
+
+Object-oriented languages implement `dynamic method dispatch`
+
+This means that the code invoked by a method call depends on the runtime type of the object that contains the method.
+
+Example:
+
+```scala
+Empty contains 1
+```
+
+
+#### Something to Ponder
+
+Dynamic dispatch of methods is analogous to calls to higher-order functions.
+
+Question: Can we implement one concept in terms of the other?
+
+* Objects in terms of higher-order functions?
+* Higher-order functions in terms of Objects?
+
+
+### How Classes are Organized
+
+#### Forms of Imports
+
+```scala
+import week3.Rational  		// named import
+import week3.{Rational, Hello}  // named import
+import week3._			// Wildcard import
+```
+
+#### Automatic Import
+
+* all members of package scala
+* all members of package java.lang
+* all members of the singleton object scala.Predef
+
+FQN of some types
+
+Int 
+
+
+#### Traits
+
+a trait is declared like an abstract class, just with `trait` instead of `abstract class`
+
+
+Example:
+```scala
+class Square extends Shape with Planar with Movable
+```
+
+Traits resemble interfaces in java, but are more powerful because they can contain fields and contrite methods
+
+Notes: Difference between class and traits
+`traits` cannot have (value) parameters, only classes can.
+
+
+#### Scala’s class Hierarchy
+
+![class hierarchy](http://www.scala-lang.org/old/node/71%3Fsize=_original.html#)
+
+Top types
+
+Any	== !=	equals hashCode toString
+
+AnyRef	java.lang.Object
+	
+AnyVal	primitives
+
+
+
+Nothing is subtype of any other type.
+* abnormal termination
+* element type of an empty collection
+
+#### the Null type
+
+Every reference class type also has null a a value
+
+The type of null is Null
+
+Null is a subtype of every class that inherits from Objects; it is incompatible with subtypes of AnyVal.
+
+
+```scala
+val x = null		// x : Null
+val y: Sting = null	// y: String
+val z: Int = null	// erro: type mismatch
+```
+
+### Polymorphism
+
+#### Cons-Lists
+
+Nil	the empty list
+Cons	
+
+#### Type parameters
+
+
+val is initial when first initialised
+def is executed only when its called
+
+#### Type erasure
+
+Type parameters do not affect evaluation in Scala.
+
+All type parameters and type arguments are removed before evaluating the program. This is called `type erasure`.
+
+Languages that use type erasure Java, Scala oCaml, Haskell
+
+two types of polymorphism:
+* subtyping
+* generics
+
