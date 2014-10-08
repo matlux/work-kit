@@ -100,4 +100,20 @@ or
 
 in our example m = 2, d = e^-0.068*2
 
+### cash flow pricing
+
+    c1 ->  c2 -> c3 -> ... -> cn
+
+    pv = c1/(1 + R) + c2/(1 + R)^2 + c3/(1 + R)^3 + ... + cn/(1+R)^n
+
+    pv = c1*e^-Rc + c2*e^-Rc*2 + c3*e^-Rc*3 + ... + cn*e^-Rc*n
+
+or more generalized
+
+    pv = sum(c[n]/(1+R[n]/m)^m*n)
+
+    pv = sum(c[n]*e^-Rc[n]*n)
+
+
+
 
