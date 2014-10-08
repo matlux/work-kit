@@ -19,15 +19,15 @@
 
 Supposed an amount A is invested for n years at an interest rate of R per annum. I f the rate is compounded once per annum, the terminal value of the investment is
 
-    A(1+R)^n
+    A*(1+R)^n
 
 If the rate is compounded m times, the terminal value is
 
-    A(1+R/m)^m.n
+    A*(1+R/m)^m.n
 
 ### Continuous Compounding
 
-    A.e^R.n
+    A*e^(R*n)
 
     100e^0.1 = $110.52
 
@@ -42,7 +42,7 @@ If the rate is compounded m times, the terminal value is
 
 ### Bond pricing
 
-Treasury sero rates <=> yield curve
+Treasury zero rates <=> yield curve
 
 | Maturity (years) | Zero Rate (%) (cont. compounded) |
 | ---------------- | -------------------------------- |
