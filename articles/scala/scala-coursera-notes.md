@@ -364,3 +364,300 @@ two types of polymorphism:
 * subtyping
 * generics
 
+
+## Week4
+
+### Functions as Objects
+
+The function type A => B is just an abbreviation for the class scala.Function1[A,B]
+
+```scala
+trait Function1[A,B] {
+  def apply(x: A): B
+}
+```
+
+#### Expansion of Function Value
+
+An anonymous function such as
+```scala
+(x: Int) =>  x * x
+```
+
+is expanded to:
+```scala
+{ class AnonFn extends Function1[Int,Int] {
+    def apply(x: Int) = x * x
+  }
+  new AnonFn
+}
+```
+
+or shorter:
+is expanded to:
+```scala
+new Function1[Int,Int] {
+  def apply(x: Int) = x * x
+}
+```
+
+#### Expansion of Function Calls
+
+A function call `f(a,b)` where f is a value of some class type. is expanded to:
+
+```scala
+f.apply(a,b)
+```
+
+So the OO-translation of 
+
+```scala
+val f = (x: Int) => x * x
+f(7)
+```
+
+would be
+
+```scala
+val f = new Function1[Int,Int]{
+    def apply(x: Int) => x * x
+  }
+f(7)
+```
+
+Note that a method such as 
+  def f(x: Int): Boolean = …
+
+is not itself a function value.
+
+But if f is used in a place where a Function type is expected, it is converted automatically to the function value
+
+```scala
+(x: Int) => f(x)	// eta-expansion (lambda calculus)
+```
+
+or
+```scala
+new Function1[Int,Int] {
+  def apply(x: Int) = f(x)
+}
+```
+
+### Subtyping and Generics
+
+Two forms:
+* sub typing   (traditionally from OOP)
+* generics     (traditionally from FP)
+
+Two main areas of interations:
+* bounds
+* variance
+
+
+#### Type Bounds
+
+
+##### Upper Bound
+```scala
+def assertAllPos[S <: IntSet](r: S): S = …
+```
+
+Here `<: IntSet` is the upper bound of the type parameter S.
+
+* `S <: T` means S is a subtype of T, and
+* `S >: T` means S is a supertype of T, of T is a subtype of S.
+
+##### Lower Bound
+
+[S >: NonEmpty]
+
+So `S` could be one of NonEmpty, InSet,AnyRef, or Any.
+
+##### Mixed Bounds
+
+
+[S >: NonEmpty <: IntSet]
+
+
+
+#### Covariance
+
+Given 
+
+    NonEmpty <: IntSet
+
+is
+
+    List[NonEmpty] <: List[IntSet]
+
+#### the Liskov Substitution Principle
+
+If `A <: B`, then everything one can do with a value of type B one  should also be able to do with a value of type A.
+
+Or more formally:
+
+Let `q(x)` be a property provable about objects `x` of type `B`.
+Then `q(y)` should be provable for objects `y` of type `A` where `A <: B`
+
+### Objects Everywhere
+
+
+### Variance
+
+Definition:
+
+Let `C[T]` be a parametrised type and `A`, `B` types such that `A <: B`.
+Three possible relationships:
+
+* `C[A] <: C[B]`                                      C is Covariant
+* `C[A] >: C[B]`                                      C is Contravariant
+* neither `C[A]` nor `C[B]` is a subtype of the other C is nonvariant or invariant 
+
+
+* `class C[+A] {…}`    C is covariant
+* `class C[-A] {…}`    C is contra variant
+* `class C[A] {…}`     C is non variant
+
+
+For example:
+
+```scala 
+type A = IntSet => NonEmpty
+type B = NonEmpty => IntSet
+```
+
+According to the Liskov Substitution Principle:
+
+`A <: B`
+
+#### Typing Rules for Functions
+
+if A2 <: A1 and B1 <: B2
+
+```scala
+A1 => B1 <: A2 => B2
+```
+
+#### Function Trait Declaration
+
+```scala
+trait Function1[-T,+U] {
+  def apply(x: T): U
+}
+```
+
+#### Variance Checks
+
+```scala
+class Array[+T] {
+  def update(x: T) …
+}
+```
+
+List 
+```scala
+def prepend[U  >: T](elem : U): List[U] = new Cons(elem,this)
+```
+
+```scala
+  def f(xs: List[NonEmpty], x: Empty) = xs prepend x
+```
+
+returns:
+`List[IntSet]`
+
+
+
+List example
+```scala
+trait List[+T] {
+  def isEmtpy: Boolean
+  def head: T
+  def tail: List[T]
+  def nth(n: Int): T
+  def prepend[U  >: T](elem : U): List[U] = new Cons(elem,this)
+}
+
+
+class Cons[T](val head: T, val tail: List[T]) extends List[T] {
+  def isEmtpy = false
+  def nth(n: Int): T = {
+    if (n==0) head else tail.nth(n-1)
+  }
+}
+object Nil extends List[Nothing] {
+  def isEmtpy = true
+  def head: Nothing = throw new NoSuchElementException("Nil.head")
+  def tail: Nothing = throw new NoSuchElementException("Nil.tail")
+  def nth(n: Int): Nothing = throw new IndexOutOfBoundsException();
+
+}
+
+object List {
+  def apply[T](a: T) = new Cons(a, Nil)
+  def apply[T](a: T, b: T) = new Cons(a,new Cons(b, Nil))
+  def apply[T](a: T, b: T, c: T) = new Cons(a,new Cons(b,new Cons(c, Nil)))
+}
+```
+
+### Decomposition
+
+### Pattern Matching
+
+#### Case Classes
+
+```scala
+object Number {
+  def apply(n: Int) = new Number(n)
+}
+```
+
+#### What do Patterns Match?
+
+* A constructor pattern c(p1,…,pn) matches all the values of type C (or subtype) which have been constructed with p1,…,pn
+* a variable pattern x matches any value and binds the name of the variable to this value
+* A constant pattern c matches values that are equal to c (==)
+
+### Lists
+
+#### Right Associativity
+
+Convention: Operators ending in “:” associate to the right.
+
+    `A :: B :: C` is interpreted as `A :: (B :: C)`
+
+Example
+
+    val numbs = 1 :: 2 :: 3 :: 4 :: Nil 
+
+or
+
+    val numbs = 1 :: (2 :: (3 :: (4 :: Nil))) 
+
+Operators ending in “:” are seen as methods calls of the right-hand operand
+
+    Nil.::(4).::(3).::(2).::(1)
+
+
+#### List Patterns
+
+It is possible to decompose lists with pattern matching
+
+* `Nil`
+* p :: ps
+* List(p1,…,pn)
+
+Example
+
+| code           | description                                       |
+|----------------|---------------------------------------------------|
+| 1 :: 2 :: xs   | List of that stat with 1 and then 2               |
+| x :: Nil       | Lists of length 1                                 |
+| List(x)        | Same as x :: Nil                                  |
+| List()         | The empty list, same as Nil                       |
+| List(2 :: xs)  | A list that contains another list starting with 2 |
+
+
+#### Sorting Lists
+
+
