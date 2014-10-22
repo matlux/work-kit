@@ -82,7 +82,7 @@ or
 | 0.5         | $3        |
 | 1           | $3        |
 | 1.5         | $3        |
-| 2           | $103        |
+| 2           | $103      |
 
 Let's price this cash flow:
 
@@ -140,6 +140,59 @@ or more generalized
 
     pv = sum0->n(c[n]*e^-Rc[n]*t[n])
 
+#### Forward Rates
+
+    Rf=(R2*T2 - R1*T1)/(T2 -T1)
+
+*Table 4.5 Calculation of forward rates*
+| time (year) | zero rate (annual rate CC)  | forward rate |
+| ----------- | --------------------------- | ------------ |
+| 1           | 3.0                         |              |
+| 2           | 4.0                         | 5.0          |
+| 3           | 4.6                         | 5.8          |
+| 4           | 5.0                         | 6.2          |
+| 4           | 5.3                         | 6.5          |
+
+#### Forward Rate Agreement (FRA)
+
+| variable    | Definition                                                                                             |
+| ----------- | ------------------------------------------------------------------------------------------------------ |
+| Rk          | The rate of interest agreed to in the FRA                                                              |
+| Rf          | The forward LIBOR interest rate for the period between T1 and T2 calculated today                      |
+| Rm          | The actual LIBOR interest rate observed in the market at timeT1 for the period between times T1 and T2 |
+| L           | The principal underlying the contract                                                                  |
+
+Above rates are expressed in (T2 - T1) compounding.
+
+Company X agree to lend money to company Y at Rk between T1 and T2.
 
 
+##### Payoff
+
+X receives at T2:
+    L(Rk - Rm)(T2 - T1)
+
+Y receives at T2:
+    L(Rm - Rk)(T2 - T1)
+
+
+X receives at T1:
+    L(Rk - Rm)(T2 - T1)/(1 + Rm*(T2 - T1))
+
+Y receives at T1:
+    L(Rm - Rk)(T2 - T1)/(1 + Rm*(T2 - T1))
+
+
+##### FRA Valuation
+
+The lender at Rk (Rk is earned):
+    Vfra = L(Rk - Rf)(T2 - T1)*e^-R2*T2
+
+The borrower at Rk (Rk is paid):
+    Vfra = L(Rf - Rk)(T2 - T1)*e^-R2*T2
+
+
+Rk = Rf when the FRA is first initiated.
+
+Rk,Rm and Rf are expressed with a compounding frequency corresponding to T2-T1, whereas R2 is expressed with continuous compounding.
 
