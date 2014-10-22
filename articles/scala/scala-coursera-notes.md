@@ -661,3 +661,79 @@ Example
 #### Sorting Lists
 
 
+### Implicit Parameters
+
+#### Rules for implicit Parameters
+
+### Other Collections
+
+#### Other Sequences
+
+Vector:
+
+    +—-+—-+—-+—-+
+    |  |  |  |  |         32 items initially then 32 refs
+    +—-+—-+—-+—-+
+    /    \   \  \  
+    | 
+    +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+
+    |  |  |  |  |   |  |  |  |  |   |  |  |  |  |   |  |  |  |  |       32x32 items = 20^10 then refs
+    +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+
+
+    /    \   \  \   /    \   \  \    /    \   \  \    /    \   \  \
+    | 
+    +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+
+    |  |  |  |  |   |  |  |  |  |   |  |  |  |  |   |  |  |  |  |       20^15 then refs
+    +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+   +—-+—-+—-+—-+
+
+    level4  20^20
+    level5  20^25
+    level6  20^30
+
+
+Complexity: log32(N)
+
+Cache locality
+
+very good for 
+* bulk operation
+* random access
+
+
+```scala
+val numbs = Vector(1,2,3)
+```
+
+Vector support same ops as lists plus the following ones:
+```scala
+x +: xs    // create a new vector with leading element x, followed by all elements of xs
+x :+ xs    // create a new vector with trailing element x, preceded by all elements of xs
+```
+
+: points to the sequence.
+
+append complexity is log32(N) (proportional to number of levels in the tree) creation of objects.
+
+
+#### Collection Hierarchy
+
+
+    +—-+—-+—-+—-+
+    | Iterable  |        
+    +—-+—-+—-+—-+_____________________
+    |                \                \   
+    |                 \                \
+    +—-+—-+—-+—-+    +—-+—-+—-+—-+   +—-+—-+—-+—-+ 
+    |  Seq      |    |Set        |   | Map       |   
+    +—-+—-+—-+—-+_   +—-+—-+—-+—-+   +—-+—-+—-+—-+ 
+    |             \
+    +—-+—-+—-+—-+  +—-+—-+—-+—-+   
+    |  List     |  |Vector     |      
+    +—-+—-+—-+—-+  +—-+—-+—-+—-+  
+
+#### Array and String
+
+Support same methods as Seq
+
+
+

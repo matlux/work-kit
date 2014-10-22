@@ -1,6 +1,8 @@
 
 # Finance Notes
 
+## 
+
 
 ## Measuring Interest Rates
 
@@ -11,30 +13,45 @@
 | ------------------- |:--------------------:|
 | Annually (m=1)      | 110.00               |
 | Semiannually (m=2)  | 110.25               |
-| Quaterly (m=4)      | 110.38               |
+| Quarterly (m=4)     | 110.38               |
 | Monthly (m=12)      | 110.47               |
 | Weekly (m=52)       | 110.51               |
 | Daily (m=360)       | 110.52               |
 
 
-Supposed an amount A is invested for n years at an interest rate of R per annum. I f the rate is compounded once per annum, the terminal value of the investment is
+Supposed an amount A is invested for t years at an interest rate of R per annum. I f the rate is compounded once per annum, the terminal value of the investment is
 
-    A*(1+R)^n
+    A*(1+R)^t
 
 If the rate is compounded m times, the terminal value is
 
-    A*(1+R/m)^m.n
+    A*(1+R/m)^m.t
 
 ### Continuous Compounding
 
-    A*e^(R*n)
+    A*e^(R*t)
 
     100e^0.1 = $110.52
 
 
+### Present - Discounting Future value
+
+* FV : future value
+* PV : present value
+* Rm : yearly interest rate compounded m times
+* t : time of the value 
+
+#### discreet
+
+    PV = FV/(1+Rm/m)^m.t
+
+#### continuous
+
+    PV = FV/e^(Rc*t) = FV*e^(-Rc*t)
+
 ### conversion equation
 
-    A*e^(Rc*n) = A*(1+Rm/m)^m*n
+    A*e^(Rc*t) = A*(1+Rm/m)^m*t
 
     Rc = m*ln(1+Rm/m)
 
@@ -104,15 +121,24 @@ in our example m = 2, d = e^-0.068*2
 
     c1 ->  c2 -> c3 -> ... -> cn
 
+#### Discreet compounding
+
     pv = c1/(1 + R) + c2/(1 + R)^2 + c3/(1 + R)^3 + ... + cn/(1+R)^n
+
+    pv = c1/(1 + Rm/m)^m*t1 + c2/(1 + Rm/m)^m*t2 + c3/(1 + Rm/m)^m*t3 + ... + cn/(1+Rm/m)^m*n
+
+#### Continuous compounding
 
     pv = c1*e^-Rc + c2*e^-Rc*2 + c3*e^-Rc*3 + ... + cn*e^-Rc*n
 
+    pv = c1*e^-Rc*t1 + c2*e^-Rc*2 + c3*e^-Rc*3 + ... + cn*e^-Rc*n
+
+
 or more generalized
 
-    pv = sum(c[n]/(1+R[n]/m)^m*n)
+    pv = sum0->n(c[n]/(1+Rm[n]/m)^m*t[n])
 
-    pv = sum(c[n]*e^-Rc[n]*n)
+    pv = sum0->n(c[n]*e^-Rc[n]*t[n])
 
 
 
