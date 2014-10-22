@@ -186,9 +186,11 @@ Y receives at T1:
 ##### FRA Valuation
 
 The lender at Rk (Rk is earned):
+
     Vfra = L(Rk - Rf)(T2 - T1)*e^-R2*T2
 
 The borrower at Rk (Rk is paid):
+
     Vfra = L(Rf - Rk)(T2 - T1)*e^-R2*T2
 
 
