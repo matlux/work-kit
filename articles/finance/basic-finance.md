@@ -170,16 +170,20 @@ Company X agree to lend money to company Y at Rk between T1 and T2.
 ##### Payoff
 
 X receives at T2:
+
     L(Rk - Rm)(T2 - T1)
 
 Y receives at T2:
+
     L(Rm - Rk)(T2 - T1)
 
 
 X receives at T1:
+
     L(Rk - Rm)(T2 - T1)/(1 + Rm*(T2 - T1))
 
 Y receives at T1:
+
     L(Rm - Rk)(T2 - T1)/(1 + Rm*(T2 - T1))
 
 
