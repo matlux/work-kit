@@ -145,6 +145,7 @@ or more generalized
     Rf=(R2*T2 - R1*T1)/(T2 -T1)
 
 *Table 4.5 Calculation of forward rates*
+
 | time (year) | zero rate (annual rate CC)  | forward rate |
 | ----------- | --------------------------- | ------------ |
 | 1           | 3.0                         |              |
