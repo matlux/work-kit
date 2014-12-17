@@ -42,3 +42,10 @@ or
 /sbin/route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.0.228
 ```
 
+# Network speed test
+
+## Server
+nc -v -l 2222 > /dev/null
+
+## Client
+dd if=/dev/zero bs=1024000 count=512 | nc -v $IP_ADDR_OF_SERVER 2222
