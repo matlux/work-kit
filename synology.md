@@ -9,14 +9,15 @@ for the DS112j:
 * ssh root@192.168.1.68 
 * mkdir /volume/temp
 * cd /volume/temp
-* wget http://wizjos.endofinternet.net/synology/archief/syno-mvkw-bootstrap_1.2-7_arm-ds111.xsh
+* wget http://ipkg.nslu2-linux.org/feeds/optware/cs08q1armel/cross/stable/syno-mvkw-bootstrap_1.2-7_arm.xsh 
 * chmod +x syno-mvkw-bootstrap_1.2-7_arm-ds111.xsh
 * sh syno-mvkw-bootstrap_1.2-7_arm-ds111.xsh
 * vi /root/.profile and put # before PATH ... 
 * browser: reboot DS112j from Synology Diskstation Main menu
 
+md5sum
 
-
+    ef916b130e1fbf34906c7e920a822ef5 syno-mvkw-bootstrap_1.2-7_arm.xsh
 
 
 
