@@ -42,6 +42,10 @@ or
 /sbin/route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.0.228
 ```
 
+on Mac:
+
+sudo route -n add 192.168.2.0/24 192.168.0.228
+
 # Network speed test
 
 ## Server
