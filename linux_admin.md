@@ -50,6 +50,18 @@ Edit the /etc/fstab file and add a line like:
 
     sudo route add -net 10.8.0.0 netmask 255.255.255.0 gw 192.168.77.17
 
+### on Mac
+
+    sudo route -n add 10.8.0.0/24 gw 192.168.77.17
+
+## Delete network route on linux
+
+    sudo route delete -net 10.8.0.0 netmask 255.255.255.0 gw 192.168.77.17
+
+### on Mac
+
+    sudo route -n delete 10.8.0.0/24 gw 192.168.77.17
+
 ## How to trace all systems call and file access on linux?
 
     strace -f -o log [process2run] [args]
@@ -62,9 +74,32 @@ Edit the /etc/fstab file and add a line like:
 
     ssh-keygen -p -f ~/.ssh/id_rsa
 
-screen
+## How to change ssh fingerprint on a server
 
-disown
+* Step # 1: Delete old ssh host keys
+
+Login as the root and type the following command to delete files on your SSHD server:
+
+    # /bin/rm -v /etc/ssh/ssh_host_*
+
+* Step # 2: Reconfigure OpenSSH Server
+
+Now create a new set of keys on your SSHD server, enter:
+
+    # dpkg-reconfigure openssh-server
+
+Sample output:
+
+```
+Creating SSH2 RSA key; this may take some time ...
+Creating SSH2 DSA key; this may take some time ...
+Restarting OpenBSD Secure Shell server: sshd.
+```
+
+
+## screen
+
+## disown
 
 ## find a port open by a process
 

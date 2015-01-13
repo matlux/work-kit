@@ -736,4 +736,24 @@ append complexity is log32(N) (proportional to number of levels in the tree) cre
 Support same methods as Seq
 
 
+## Week6
 
+### For translation
+
+```scala
+for {
+  i <- 1 until n
+  j <- 1 until i
+  if isPrime(i + j)
+} yield (i+j) 
+
+```
+
+converts into:
+
+```scala
+(1 until n).flatMap(i =>
+ (1 until i).withFilter(j => isPrime(i + j))
+  .map(j => (i,j)) )
+
+```
