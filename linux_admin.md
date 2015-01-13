@@ -128,3 +128,5 @@ Restarting OpenBSD Secure Shell server: sshd.
 ## How to test 7zip files
 
     7z t archive.7z file1 files* -r
+
+see [this](http://www.dotnetperls.com/7-zip-examples) for more details
