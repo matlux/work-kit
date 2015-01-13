@@ -118,3 +118,13 @@ Restarting OpenBSD Secure Shell server: sshd.
 ## add a user with adduser (higher level command interactive)
 
     adduser joeblog
+
+# zipping
+
+## How to 7zip a bunch of files
+
+    7za a -t7z archive.7z file1 files*
+
+## How to test 7zip files
+
+    7z t archive.7z file1 files* -r
