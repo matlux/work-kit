@@ -66,6 +66,8 @@ Edit the /etc/fstab file and add a line like:
 
     strace -f -o log [process2run] [args]
 
+# SSH stuff
+
 ## ssh tuneling
 
     ssh -L22222:localhost:222 remoteuser@remotehost
@@ -96,7 +98,36 @@ Creating SSH2 DSA key; this may take some time ...
 Restarting OpenBSD Secure Shell server: sshd.
 ```
 
+## How to Generate an RSA key to connect onto another computer?
 
+```
+mkdir ~/.ssh
+chmod 700 ~/.ssh
+ssh-keygen -t rsa
+```
+
+You'll get something like this:
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/b/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/b/.ssh/id_rsa.
+Your public key has been saved in /home/b/.ssh/id_rsa.pub.
+```
+
+Then append the content of `id_rsa.pub` into the `~/.ssh/authorized_keys`
+
+Copy and paste or the following will work.
+```
+cp authorized_keys authorized_keys_Backup
+cat id_rsa.pub >> authorized_keys
+```
+
+Alternativelly you can use this handy command:
+```
+ssh-copy-id <username>@<host>
+```
 ## screen
 
 ## disown
