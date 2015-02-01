@@ -24,3 +24,17 @@ change disk4 to whatever number your sd device in bound to
     sudo /etc/init.d/hostname.sh
     sudo vim /etc/hosts
 
+## how to change ssh fingerprint on a server
+
+* Step # 1: Delete old ssh host keys
+
+Login as the root and type the following command to delete files on your SSHD server:
+
+    # /bin/rm -v /etc/ssh/ssh_host_*
+
+* Step # 2: Reconfigure OpenSSH Server
+
+Now create a new set of keys on your SSHD server, enter:
+
+    # dpkg-reconfigure openssh-server
+
