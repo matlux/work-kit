@@ -22,4 +22,5 @@ change disk4 to whatever number your sd device in bound to
 
     sudo vim /etc/hostname 
     sudo /etc/init.d/hostname.sh
+    sudo vim /etc/hosts
 
