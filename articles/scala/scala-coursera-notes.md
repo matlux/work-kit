@@ -1,4 +1,5 @@
 
+# Functional programming fundamentals
 
 ## Week1
 
@@ -756,4 +757,100 @@ converts into:
  (1 until i).withFilter(j => isPrime(i + j))
   .map(j => (i,j)) )
 
+```
+
+
+# Reactive Programming Course
+
+## Week 1 
+
+### Monads
+
+map in terms of flatMap
+
+```scala
+m map f == m flatMap (x => unit(f(x)))
+```
+
+```scala
+m map f == m flatMap (f andThen unit))
+```
+
+#### Monad Laws
+
+Associativity:
+```scala
+m flatMap f flatMap g == m flatMap (x => f(x) flatMap g)
+```
+
+Left unit
+```scala
+unit(x) flatMap f == f(x)
+```
+
+Right unit
+```scala
+m flatMap unit == m
+```
+
+## Week2
+
+### Testing for Operational Equivalence
+
+To test if x and y are the same, we must
+* Execute the definitions followed by an arbitrary sequence of
+operations that involves x and y, observing the possible outcomes.
+
+    val x = new BankAccount val x = new BankAccount
+    val y = new BankAccount val y = new BankAccount
+    f(x, y) f(x, x)
+
+* Then, execute the definitions with another sequence S’ obtained by
+renaming all occurrences of y by x in S
+
+## Week3
+
+### Monads and Effects
+
+#### Try[T]
+
+A monad that handles `exceptions`
+
+#### Future[T]
+
+A monad that handles	
+exceptions and latency.	
+
+Calling onCompleted() twice returns the same result
+
+object Try {  def apply(f: Future[T]): Future[Try[T]] = { ... }}
+    ( )  f onComplete { x ⇒ x }    ( )  f recoverWith { case t ⇒ Future.failed(t) }    ( )  f.map(x ⇒ Try(x))    (x) f.map(s⇒Success(s)) recover { case t ⇒ Failure(t) }
+
+Dangerous:
+
+```scala
+trait Awaitable[T] extends AnyRef {  abstract def ready(atMost: Duration): Unit  abstract def result(atMost: Duration): T}
+```
+
+
+
+```scala
+def retry(noTimes: Int)(block: ⇒Future[T]): Future[T] = async {
+  var i = 0  var result: Try[T] = Failure(new Exception(“sorry man!”)) 
+  while (i < noTimes && result.isFailure) {    result = await { Try(block) }    i += 1
+  }  result.get 
+}
+object Try {  def apply(f: Future[T]): Future[Try[T]] = {...}}
+```
+
+##### Race
+
+```scala
+import scala.concurrent.ExecutionContext.Implicits.global
+def race[T](left: Future[T], right: Future[T]): Future[T] = {
+ val p = Promise[T]()
+ left onComplete { p.tryComplete(_) }
+ right onComplete { p.tryComplete(_) }
+ p.future
+} 
 ```
