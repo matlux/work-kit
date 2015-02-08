@@ -38,3 +38,22 @@ Now create a new set of keys on your SSHD server, enter:
 
     # dpkg-reconfigure openssh-server
 
+## How to setup Clojure dev environment on Raspberry pi
+
+setup the repl timout to a very large value inside the project.clj:
+
+```
+:repl-options {:init-ns user
+	       :timeout 300000}
+```
+
+start repl headless with the ip address of the pi:
+```
+lein repl :headless :host 192.168.***.*** :port 4567
+```
+
+on mac connect onto:
+```
+nfs://matpi.local/home/mathieu/clojure
+lein repl :connect nrepl://192.168.*.*:4567
+```
