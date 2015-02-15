@@ -57,3 +57,17 @@ on mac connect onto:
 nfs://matpi.local/home/mathieu/clojure
 lein repl :connect nrepl://192.168.*.*:4567
 ```
+
+# Printers
+
+## How to setup an HP printer like the Office Deskjet 8600 ?
+
+* sudo apt-get install hplib hplib-gui
+* sudo groupadd printadmin
+* sudo usermod -aG printadmin pi
+* add `SystemGroup printadmin` at the end of /etc/cups/cupsd.conf
+* reboot machine
+* http://localhost:631 or go to `Menu -> Preferences -> HPLIB Toolbox`
+* Follow install process to add printer
+
+[see this](https://bbs.archlinux.org/viewtopic.php?id=35567) for more info
