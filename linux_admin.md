@@ -161,3 +161,20 @@ ssh-copy-id <username>@<host>
     7z t archive.7z file1 files* -r
 
 see [this](http://www.dotnetperls.com/7-zip-examples) for more details
+
+# Partimage - How to use it to backup and restor disk images
+
+## How to Save image
+
+* mkdir /mnt/samba
+* mount -t smbfs //hal/public /mnt/samba -o username=[username]
+* partimage save /dev/sda1 /mnt/samba/staff/[username]/D600_training_img.pimg.gz
+* dd if=/dev/hda of=/mnt/samba/staff/[username]/sda.mbr count=1 bs=512
+* sfdisk -d /dev/hda > /mnt/samba/staff/[username]/sda.pt
+
+## How To Restore:
+* dd if=/mnt/samba/staff/[username]/sda.mbr of=/dev/sda
+* sfdisk /dev/hda < /mnt/samba/staff/[username]/sda.pt
+* mkdir /mnt/samba
+* mount -t smbfs //hal/public /mnt/samba -o username=[username]
+* partimage -e restore /dev/sda1 /mnt/samba/staff/[username]/D600_training_img.pimg.gz.000
