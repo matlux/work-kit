@@ -21,6 +21,14 @@ change disk4 to whatever number your sd device in bound to
     
 # On linux
 
+## how to write an image onto an sd card
+
+    sudo dd bs=4M if=raspbian.img of=/dev/sdb
+
+## how to backup an image from an sd card
+
+    sudo dd bs=4M if=/dev/sdb of=raspbian.img
+
 ## How to copy from sd card to sd card
 
     sudo dd if=/dev/sda of=/dev/sdb bs=4M conv=sync,noerror
