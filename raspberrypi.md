@@ -17,6 +17,26 @@ change disk4 to whatever number your sd device in bound to
 ## how to only backup 8GB from a 32GB
 
     sudo dd of=~/Downloads/matpi_2015-01-13.img if=/dev/disk5 bs=1m count=7948
+    
+    
+# On linux
+
+## How to copy from sd card to sd card
+
+    sudo dd if=/dev/sda of=/dev/sdb bs=4M conv=sync,noerror
+
+
+## How to find the information about the partitions
+
+    sudo fdisk -l
+
+### Same on an image
+
+    sudo fdisk -l -u image.img
+    
+## Here is an article to deal with SD card size mismatching size issues:
+
+[here](http://www.raspberrypi.org/forums/viewtopic.php?f=66&t=96805)
 
 ## how to change hostname 
 
