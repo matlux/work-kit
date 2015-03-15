@@ -148,8 +148,10 @@ Once this is done, restart the SSH daemon to apply the settings:
 ```
 /etc/init.d/sshd restart
 ```
-
 see [this link](http://support.hostgator.com/articles/specialized-help/technical/how-to-disable-password-authentication-for-ssh) for more reference.
+
+On Synology you can restart the daemon with:
+Save the file and restart the SSH daemon. The easier is to use the GUI/WEB login. Click on the Control Panel -> Terminal. Uncheck Enable SSH Service, apply, check it again, and press apply again.
 
 For Synology NAS follow [this](http://www.eldemonionegro.com/blog/archivos/2012/08/19/how-to-securely-activate-ssh-into-your-synology-diskstation-with-ssh-keys-and-no-root-login) for more details.
 
