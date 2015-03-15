@@ -128,6 +128,31 @@ Alternativelly you can use this handy command:
 ```
 ssh-copy-id <username>@<host>
 ```
+## How to Disable Password Authentication for SSH
+
+```
+vim /etc/ssh/sshd_config
+```
+
+modify the following:
+```
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+UsePAM no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+```
+`PasswordAuthentication no` is the most important.
+
+Once this is done, restart the SSH daemon to apply the settings:
+```
+/etc/init.d/sshd restart
+```
+
+see (this link)[http://support.hostgator.com/articles/specialized-help/technical/how-to-disable-password-authentication-for-ssh] for more reference.
+
+For Synology NAS follow (this)[http://www.eldemonionegro.com/blog/archivos/2012/08/19/how-to-securely-activate-ssh-into-your-synology-diskstation-with-ssh-keys-and-no-root-login] for more details.
+
 ## screen
 
 ## disown
