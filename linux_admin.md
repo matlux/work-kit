@@ -52,7 +52,7 @@ Edit the /etc/fstab file and add a line like:
 
 ### on Mac
 
-    sudo route -n add 10.8.0.0/24 gw 192.168.77.17
+    sudo route -n add 10.8.0.0/24 192.168.77.17
 
 ## Delete network route on linux
 
@@ -60,7 +60,7 @@ Edit the /etc/fstab file and add a line like:
 
 ### on Mac
 
-    sudo route -n delete 10.8.0.0/24 gw 192.168.77.17
+    sudo route -n delete 10.8.0.0/24 192.168.77.17
 
 ## How to trace all systems call and file access on linux?
 
