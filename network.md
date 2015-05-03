@@ -53,3 +53,41 @@ nc -v -l 2222 > /dev/null
 
 ## Client
 dd if=/dev/zero bs=1024000 count=512 | nc -v $IP_ADDR_OF_SERVER 2222
+
+
+# How to install DHCP server
+
+```sh
+root# apt-get install isc-dhcp-server
+```
+
+edit `/etc/default/isc-dhcp-server`
+
+```sh
+INTERFACES="eth0"
+```
+
+Edit
+
+```sh
+user> dhcpd.conf 
+```
+
+## Starting the DHCP server
+
+You can test your DHCP server without rebooting:
+
+```sh
+sudo service isc-dhcp-server stop
+sudo service isc-dhcp-server start
+sudo ifdown eth0
+sudo ifup eth0
+```
+
+To see your DHCP server error messages, or see when a device has grabbed an IP from this DHCP server:
+
+```sh
+sudo tail /var/log/syslog
+```
+
+
