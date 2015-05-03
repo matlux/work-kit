@@ -211,5 +211,5 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 ## router debian
 
 ```sh
-sudo apt-get install vim htop iftop isc-dhcp-server bind9
+sudo apt-get install vim htop iftop isc-dhcp-server bind9 git
 ```
