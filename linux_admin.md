@@ -205,3 +205,11 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 * mkdir /mnt/samba
 * mount -t cifs //hal/public /mnt/samba -o iocharset=utf8,username=[username],sec=ntlm
 * partimage -e restore /dev/sda1 /mnt/samba/staff/[username]/D600_training_img.pimg.gz.000
+
+# install new images
+
+## router debian
+
+```sh
+sudo apt-get install vim htop iftop isc-dhcp-server bind9
+```
