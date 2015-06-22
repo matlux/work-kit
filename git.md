@@ -118,3 +118,13 @@ So let’s say we want to go back four commits from our current HEAD, and we wan
     $ git checkout -b mynewfeature
     ... edit files, add and commit ...
     $ git push -u origin mynewfeature
+
+
+## How to remove submodules
+
+* mv subfolder asubmodule_tmp
+* git submodule deinit asubmodule    
+* git rm asubmodule
+* mv asubmodule_tmp asubmodule
+* cd asubmodule
+* rm .git .gitignore .idea build asubmodule.iml target
