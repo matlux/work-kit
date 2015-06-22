@@ -128,3 +128,5 @@ So let’s say we want to go back four commits from our current HEAD, and we wan
 * mv asubmodule_tmp asubmodule
 * cd asubmodule
 * rm .git .gitignore .idea build asubmodule.iml target
+* git add asubmodule
+* git commit -m "removed asubmodule module"
