@@ -61,7 +61,7 @@ class test {
 ## how do you use pattern matching with classes?
 	use unapply
 	
-    see more at [http://danielwestheide.com/blog/2012/11/21/the-neophytes-guide-to-scala-part-1-extractors.html](http://danielwestheide.com/blog/2012/11/21/the-neophytes-guide-to-scala-part-1-extractors.html)
+- See more at: http://danielwestheide.com/blog/2012/11/21/the-neophytes-guide-to-scala-part-1-extractors.html
 
 ## how do you use a class as a Function?
 	use apply method
