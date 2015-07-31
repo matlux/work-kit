@@ -1,4 +1,10 @@
 
+## What is the difference between Nil, Null, None ?
+
+Nil = empty list
+None = absence of element in Option
+Null = null exists in all JVM languages, including Scala and Clojure. It's the NPE.
+
 ## How do scala traits differ from java interfaces?
 Unlike Java interfaces, Scala traits can include code, which effectively gives the ability to do multiple inheritance.
 
