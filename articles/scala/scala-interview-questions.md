@@ -1,9 +1,10 @@
 
-## What is the difference between Nil, Null, None ?
+## What is the difference between Nil, Null, None, Nothing ?
 
 Nil = empty list
 None = absence of element in Option
 Null = null exists in all JVM languages, including Scala and Clojure. It's the NPE.
+Nothing is a subtype of every other type (including scala.Null); there exist no instances of this type. Although type Nothing is uninhabited, it is nevertheless useful in several ways. For instance, the Scala library defines a value scala.collection.immutable.Nil of type List[Nothing]. Because lists are covariant in Scala, this makes scala.collection.immutable.Nil an instance of List[T], for any element of type T.
 
 ## How do scala traits differ from java interfaces?
 Unlike Java interfaces, Scala traits can include code, which effectively gives the ability to do multiple inheritance.
