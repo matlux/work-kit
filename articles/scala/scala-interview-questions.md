@@ -12,7 +12,7 @@ Nothing is a subtype of every other type (including scala.Null); there exist no 
 * from "list a" create another list with all those values mutliplied by 3 => "list b"
 * then create a list only containing the even numbers from "list b"
 
-## Same with a for comprehension?
+### Same question with a for comprehension?
 
 ## Extract a list of the vlues from
 
