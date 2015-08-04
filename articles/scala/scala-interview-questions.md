@@ -6,6 +6,25 @@ None = absence of element in Option
 Null = null exists in all JVM languages, including Scala and Clojure. It's the NPE.
 Nothing is a subtype of every other type (including scala.Null); there exist no instances of this type. Although type Nothing is uninhabited, it is nevertheless useful in several ways. For instance, the Scala library defines a value scala.collection.immutable.Nil of type List[Nothing]. Because lists are covariant in Scala, this makes scala.collection.immutable.Nil an instance of List[T], for any element of type T.
 
+## Write code to
+
+* construct a list of the numbers 1 to 10 "list a"
+* from "list a" create another list with all those values mutliplied by 3 => "list b"
+* then create a list only containing the even numbers from "list b"
+
+## Same with a for comprehension?
+
+## Extract a list of the vlues from
+
+```scala
+val opts = List(None, Some(1), None)
+```
+
+Hint:
+* with flatMap
+* with for comprehension
+
+
 ## How do scala traits differ from java interfaces?
 Unlike Java interfaces, Scala traits can include code, which effectively gives the ability to do multiple inheritance.
 
