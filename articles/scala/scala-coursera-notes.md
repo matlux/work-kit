@@ -309,7 +309,7 @@ Notes: Difference between class and traits
 
 #### Scala’s class Hierarchy
 
-![class hierarchy](http://www.scala-lang.org/old/node/71%3Fsize=_original.html#)
+![class hierarchy](http://www.scala-lang.org/old/sites/default/files/images/classhierarchy.img_assist_custom.png)
 
 Top types
 
