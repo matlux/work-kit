@@ -6,6 +6,18 @@ None = absence of element in Option
 Null = null exists in all JVM languages, including Scala and Clojure. It's the NPE.
 Nothing is a subtype of every other type (including scala.Null); there exist no instances of this type. Although type Nothing is uninhabited, it is nevertheless useful in several ways. For instance, the Scala library defines a value scala.collection.immutable.Nil of type List[Nothing]. Because lists are covariant in Scala, this makes scala.collection.immutable.Nil an instance of List[T], for any element of type T.
 
+## Usages of Null / Nothing / Unit
+
+You only use Nothing if the method never returns (meaning it cannot complete normally by returning, it could throw an exception). Nothing is never instantiated and is there for the benefit of the type system (to quote James Iry: "The reason Scala has a bottom type is tied to its ability to express variance in type parameters.").
+
+One other use of Nothing is as a return type for methods that never return. It makes sense if you think about it. If a method’s return type is Nothing, and there exists absolutely no instance of Nothing, then such a method must never return.
+
+Unit is a subtype of scala.AnyVal. There is only one value of type Unit, (), and it is not represented by any object in the underlying runtime system. A method with return type Unit is analogous to a Java method which is declared void.
+
+Null is a trait and its only instance is null. Null might be used as a bottom type for any "value" ("value" as in "val" or "var", I should say a reference to avoid refering to a primitive JVM value) that is nullable i.e. AnyRef.
+
+When a method takes a Null argument, then we can only pass it a Null reference or null directly, but not any other reference, even if it is null (nullString: String = null for exemple).
+
 ## Write code to
 
 * construct a list of the numbers 1 to 10 "list a"
