@@ -109,5 +109,20 @@ sudo tail /var/log/syslog
 |client3.crt	|client3 only	|Client3 Certificate	|NO|
 |client3.key	|client3 only	|Client3 Key	|YES|
 
+## How to Setting up your own Certificate Authority (CA) and generating certificates and keys for an OpenVPN server and multiple clients
+
+
+    sudo mkdir /etc/openvpn/easy-rsa/
+    
+    sudo vi /etc/openvpn/easy-rsa/vars
+
+```sh
+export KEY_COUNTRY="US"
+export KEY_PROVINCE="CA"
+export KEY_CITY="SanFrancisco"
+export KEY_ORG="Fort-Funston"
+export KEY_EMAIL="me@myhost.mydomain"
+```
+
 
 
