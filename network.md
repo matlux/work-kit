@@ -90,4 +90,24 @@ To see your DHCP server error messages, or see when a device has grabbed an IP f
 sudo tail /var/log/syslog
 ```
 
+# OpenVPN
+
+## files
+
+
+|Filename	|Needed By	|Purpose	|Secret|
+|-----------|-----------|-----------|------|
+|ca.crt	|server + all clients	|Root CA certificate	|NO|
+|ca.key	|key signing machine only	|Root CA key	|YES|
+|dh{n}.pem	|server only	|Diffie Hellman parameters	|NO|
+|server.crt	|server only	|Server Certificate	|NO|
+|server.key	|server only	|Server Key	|YES|
+|client1.crt	|client1 only	|Client1 Certificate	|NO|
+|client1.key	|client1 only	|Client1 Key	|YES|
+|client2.crt	|client2 only	|Client2 Certificate	|NO|
+|client2.key	|client2 only	|Client2 Key	|YES|
+|client3.crt	|client3 only	|Client3 Certificate	|NO|
+|client3.key	|client3 only	|Client3 Key	|YES|
+
+
 
