@@ -23,7 +23,7 @@
     iptables -t nat -n -l
 
 
-## How to masquerade
+## How to masquerade or Source NAT
 
 ```sh
 /sbin/iptables -P FORWARD ACCEPT
