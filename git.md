@@ -130,3 +130,7 @@ So let’s say we want to go back four commits from our current HEAD, and we wan
 * rm .git .gitignore .idea build asubmodule.iml target
 * git add asubmodule
 * git commit -m "removed asubmodule module"
+
+## How do I make Git ignore file mode (chmod) changes?
+
+    git config core.fileMode false
