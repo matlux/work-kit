@@ -134,3 +134,9 @@ So let’s say we want to go back four commits from our current HEAD, and we wan
 ## How do I make Git ignore file mode (chmod) changes?
 
     git config core.fileMode false
+
+## Undo part of unstaged changes in git?
+
+    git stash -p; git reset --hard; git stash pop
+    
+    
