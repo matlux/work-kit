@@ -24,16 +24,16 @@ bin/hbase org.apache.hadoop.hbase.mapreduce.Import <tablename> <inputdir>
     
 ### Create table
     
-create 'mynamespace:table_name', {NAME => 'main', VERSIONS => 100}
+    create 'mynamespace:table_name', {NAME => 'main', VERSIONS => 100}
 
 ### List content of a table
 
-scan 'mynamespace:table_name'
-scan 'mynamespace:table_name', {STARTROW => "\x00\x00global", LIMIT => 10}
+    scan 'mynamespace:table_name'
+    scan 'mynamespace:table_name', {STARTROW => "\x00\x00global", LIMIT => 10}
 
 ### Add an entry to a table
 
-put 'mynamespace:table_name', "\x00\x00config\x00\x00users\x00\x00phil", "main:content", '{"rights" (("root" "p") ("testgroup" "p")), "groups" ()}'
+    put 'mynamespace:table_name', "\x00\x00config\x00\x00users\x00\x00phil", "main:content", '{"rights" (("root" "p") ("testgroup" "p")), "groups" ()}'
 
 ### Import a directory into hbase
 
