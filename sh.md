@@ -1,4 +1,8 @@
 
+## Pimp your Bash prompt
+
+    export PS1='\[\e[36m\]\u\[\e[m\]@\[\e[1;32m\]\H:\[\e[1;33m\]\w\[\e[m\]\n\[\e[1;31m\]\t \[\e[m\]\[\e[35m\][\!:0!]&[\j]\[\e[1;36m\]$\[\e[m\]'
+
 
 ## find files not recognised by system. 
 
