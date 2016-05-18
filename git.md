@@ -1,6 +1,14 @@
 
 
-## git tips
+# git tips
+
+## Generate SSH key
+
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    
+## Test you ssh key
+
+    ssh -vT git@hostname.com -p 4999
 
 ## create patch of what is in working directory
 
