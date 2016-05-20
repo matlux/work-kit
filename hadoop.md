@@ -30,6 +30,7 @@ bin/hbase org.apache.hadoop.hbase.mapreduce.Import <tablename> <inputdir>
 
     scan 'mynamespace:table_name'
     scan 'mynamespace:table_name', {STARTROW => "\x00\x00global", LIMIT => 10}
+    scan 'mynamespace:table_name', {STARTROW => "\x00\x00home", ENDROW => "\x00\x00home\x00\x01"}
 
 ### Add an entry to a table
 
