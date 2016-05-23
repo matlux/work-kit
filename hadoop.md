@@ -54,7 +54,7 @@ bin/hbase org.apache.hadoop.hbase.mapreduce.Import <tablename> <inputdir>
     [key, nb_path]
   }.each { | (key, nb_path) |
     content = IO.read(nb_path)
-    put 'mynamespace:table_name', key , "main:content", content
+    put 'mynamespace:table_name', key , "mycolumnFam:myQualifier", content
   }
 ```
 
