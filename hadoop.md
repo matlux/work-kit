@@ -10,7 +10,7 @@
 
 ### Reference
 
-    [link](https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/)
+[link](https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/)
 
 ### Import / Export
 
