@@ -61,6 +61,18 @@ bin/hbase org.apache.hadoop.hbase.mapreduce.Import <tablename> <inputdir>
 ### Delete scanned rows
 
 ```ruby
+import org.apache.hadoop.hbase.HBaseConfiguration
+import org.apache.hadoop.hbase.client.HTable
+import org.apache.hadoop.hbase.client.Scan
+import org.apache.hadoop.hbase.client.ResultScanner
+import org.apache.hadoop.hbase.client.Result
+import org.apache.hadoop.hbase.client.ConnectionFactory
+import org.apache.hadoop.hbase.client.Connection
+import org.apache.hadoop.hbase.client.Delete
+import org.apache.hadoop.hbase.util.Bytes
+import org.apache.hadoop.hbase.filter.KeyOnlyFilter
+import java.util.ArrayList
+
   connection = ConnectionFactory.createConnection(HBaseConfiguration.create())
   admin = connection.getAdmin()
   tableName = TableName.valueOf("my_ns:MyTable")
