@@ -57,3 +57,31 @@ bin/hbase org.apache.hadoop.hbase.mapreduce.Import <tablename> <inputdir>
     put 'mynamespace:table_name', key , "main:content", content
   }
 ```
+
+### Delete scanned rows
+
+```ruby
+  connection = ConnectionFactory.createConnection(HBaseConfiguration.create())
+  admin = connection.getAdmin()
+  tableName = TableName.valueOf("my_ns:MyTable")
+  table = connection.getTable(tableName)
+  scanOp = Scan.new(Bytes.toBytes("\x00\x00home"), Bytes.toBytes("\x00\x00home\x00\x01"))
+  scanOp.setFilter(KeyOnlyFilter.new)
+  rs = table.getScanner(scanOp)
+  
+  output = ArrayList.new
+  rs.each { |r| 
+    r.raw.each { |kv|
+      row = Bytes.toString(kv.getRow)
+      fam = Bytes.toString(kv.getFamily)
+      ql = Bytes.toString(kv.getQualifier)
+      ts = kv.getTimestamp
+      output.add [kv.getRow, row, fam, ql, ts]
+    }
+  }
+  keys2delete = output.to_a.collect {|(row, rowStr, fam, ql, ts)| row} 
+  
+  keys2delete.each{|row|
+    table.delete(Delete.new(row))
+  }
+```
