@@ -18,3 +18,8 @@ $ cat /opt/Utils/linux/bin/emacs
 #!/bin/sh
 /Applications/Emacs.app/Contents/MacOS/Emacs "$@"
 ```
+
+
+## ZeroMq examples
+
+https://github.com/matlux/cljzmq-examples/blob/master/test/cljzmq_examples/serialization/clojure_test.clj
