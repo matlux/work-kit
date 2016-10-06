@@ -9,6 +9,14 @@
 ## Test you ssh key
 
     ssh -vT git@hostname.com -p 4999
+    
+## Set your username with the following command:
+
+    git config --global user.name "Billy Everyteen"
+
+## Set your email address with the following command:
+
+    git config --global user.email "your_email@example.com"
 
 ## create patch of what is in working directory
 
