@@ -1,6 +1,6 @@
 
 
-## How to install and use boot2docker
+## How to install and use boot2docker on Mac
 
 see http://penandpants.com/2014/03/09/docker-via-homebrew/
 
@@ -43,3 +43,31 @@ docker build -t docker-cdh54 .
 docker run -v /root/docker:/root -p 8042:8042 -p 8088:8088 -p 8020:8020 -p 8888:8888 -p 11000:11000 -p 11443:11443 -p 9090:9090 -d -ti --privileged=true docker-cdh54
 docker attach 922ac2f47d93
 ```
+## common command lines
+
+### How to list images with docker
+
+    docker images
+
+### How to list (running) containers
+
+    docker ps
+    
+### How to attach to a container
+
+    docker attach 922ac2f47d93
+
+### How to exit a container without shutting down the container
+
+You can disconnect and leave the container running by typing Ctrl+p followed by Ctrl+q.
+
+## How to use the Cloudera Hadoop Docker image
+
+https://www.cloudera.com/documentation/enterprise/5-6-x/topics/quickstart_docker_container.html
+
+
+
+```bash
+docker run -v /root/docker:/home/mathieu/datashare/dev -p 8042:8042 -p 8088:8088 -p 8020:8020 -p 8888:8888 -p 11000:11000 --hostname=quickstart.cloudera --privileged=true -t -i cloudera/quickstart /usr/bin/docker-quickstart
+```
+
