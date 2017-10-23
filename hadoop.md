@@ -97,3 +97,9 @@ import java.util.ArrayList
     table.delete(Delete.new(row))
   }
 ```
+
+## Yarn
+
+### Web UI
+
+    http://localhost:8088
