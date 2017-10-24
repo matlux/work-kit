@@ -128,6 +128,11 @@ for a file in particular
 So let’s say we want to go back four commits from our current HEAD, and we want the index.html file.
 
     git show HEAD~4:index.html
+    
+or
+
+    git checkout 08618129e66127921fbfcbc205a06153c92622fe path/to/file.txt
+
 
 ## How to push a new local branch to remote repo and track it too
 
