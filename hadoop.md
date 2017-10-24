@@ -103,3 +103,10 @@ import java.util.ArrayList
 ### Web UI
 
     http://localhost:8088
+
+
+## HUE
+
+### Web UI
+
+    http://localhost:8888
