@@ -159,5 +159,11 @@ or
 ## Undo part of unstaged changes in git?
 
     git stash -p; git reset --hard; git stash pop
-    
+
+## How to push tags
+
+```bash
+git tag R_2017-10-24
+git push origin R_2017-10-24
+```
     
