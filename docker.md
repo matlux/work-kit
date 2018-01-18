@@ -53,9 +53,13 @@ docker attach 922ac2f47d93
 
     docker ps
     
-### How to attach to a container
+### How to attach to a background container
 
     docker attach 922ac2f47d93
+
+From docker 1.3 onwards.
+
+    docker exec -it <containerIdOrName> bash   
 
 ### How to exit a container without shutting down the container
 
