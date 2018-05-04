@@ -112,6 +112,10 @@ or simplified
 ## How to find a jar file containing a specific file
 
     find . -name "*.jar" | xargs grep -n "engine.properties"
+    
+## How to find a file that contains a specific string
+
+    grep --include=\README.{md,txt} -rnw ./ -e 'pattern'
 
 ## How to sort folders by size
 
