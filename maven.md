@@ -123,3 +123,21 @@ mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.
 ## How to generate a new jar project from commandline
 
     mvn archetype:generate -DgroupId={project-packaging} -DartifactId={project-name} -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+    
+## Maven Archetypes
+
+### How to quickly create a Simple Java project?
+
+Quick example:
+    mvn archetype:generate -B -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DarchetypeVersion=1.0.0 -DgroupId=net.matlux -DartifactId=java8-playpark -Dversion=1.0 -Dpackage=net.matlux -DcompilerMode=simple -DtestLibrary=junit
+    
+More general options:
+```bash
+mvn archetype:generate -B \
+ -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DarchetypeVersion=1.0.0 \
+ -DgroupId=com.example -DartifactId=project -Dversion=1.0 -Dpackage=com.example.project \
+ -DcompilerMode=[simple, test-only, retrolambda-main, retrolambda-all] \ #optional
+ -DtestLibrary=[junit, testng, none] #optional
+```
+
+Reference: https://github.com/mikolak-net/java8-quickstart-archetype
