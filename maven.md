@@ -129,7 +129,9 @@ mvn install:install-file -DgroupId=clj-http -DartifactId=clj-http -Dversion=0.4.
 ### How to quickly create a Simple Java project?
 
 Quick example:
-    mvn archetype:generate -B -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DarchetypeVersion=1.0.0 -DgroupId=net.matlux -DartifactId=java8-playpark -Dversion=1.0 -Dpackage=net.matlux -DcompilerMode=simple -DtestLibrary=junit
+```bash
+mvn archetype:generate -B -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DarchetypeVersion=1.0.0 -DgroupId=net.matlux -DartifactId=java8-playpark -Dversion=1.0 -Dpackage=net.matlux -DcompilerMode=simple -DtestLibrary=junit
+```
     
 More general options:
 ```bash
