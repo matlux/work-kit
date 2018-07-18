@@ -99,6 +99,14 @@ then add something like this to pom:
 
 ```
 
+## How to change version of a project
+
+    mvn versions:set -DnewVersion=$release_version -DgenerateBackupPoms=false versions:commit
+    
+Example
+    
+    mvn versions:set -DnewVersion=1.2.3 -DgenerateBackupPoms=false versions:commit
+
 ## How to deploy files to Nexus
 
 ```bash
