@@ -60,4 +60,17 @@ use killrvideo;
 
 ### Create Table
 
-CREATE TABLE video (video_id uuid, added_date timestamp, Title text, PRIMARY KEY (video_id ));
+```sql
+CREATE TABLE videos (video_id uuid, added_date timestamp, Title text, PRIMARY KEY (video_id ));
+```
+
+### Insert into Table
+
+```sql
+insert into videos (video_id , added_date , title ) values (1645ea59-14bd-11e5-a993-8138354b7e31, '2014-01-29', 'Cassandra History');
+insert into videos (video_id , added_date , title ) values (1645ea59-14bd-11e5-a993-8138354b7e31, '2014-01-29', 'Cassandra History');
+insert into videos (video_id , added_date , title ) values (1645ea59-14bd-11e5-a993-8138354b7e31, '2014-01-29', 'Cassandra History');
+
+```
+
+
