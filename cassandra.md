@@ -44,3 +44,20 @@ or
 ## Grant DseClientTool RPC
 
     GRANT EXECUTE ON REMOTE OBJECT DseClientTool TO mathieu;
+    
+    
+## Tutorial
+
+### Create Keyspaces
+
+```sql
+DROP KEYSPACE IF EXISTS killrvideo;
+
+CREATE KEYSPACE killrvideo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+use killrvideo;
+```
+
+### Create Table
+
+CREATE TABLE video (video_id uuid, added_date timestamp, Title text, PRIMARY KEY (video_id ));
