@@ -72,7 +72,14 @@ insert into videos (video_id , added_date , title ) values (245e8024-14bd-11e5-9
 insert into videos (video_id , added_date , title ) values (3452f7de-14bd-11e5-855e-8738355b7e3a, '2013-03-17', 'Cassandra Intro');
 insert into videos (video_id , added_date , title ) values (4845ed97-14bd-11e5-8a40-8338255b7e33, '2013-10-16', 'DataStax DevCenter');
 insert into videos (video_id , added_date , title ) values (5645f8bd-14bd-11e5-af1a-8638355b8e3a, '2013-04-16', 'What is DataStax Enterprise?');
+```
 
+### Copy to CSV
+
+```
+COPY videos(video_id, added_date, title)
+FROM '/home/ubuntu/labwork/data-files/videos.csv'
+WITH HEADER=TRUE;
 ```
 
 
