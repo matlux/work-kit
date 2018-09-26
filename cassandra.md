@@ -62,6 +62,7 @@ use killrvideo;
 
 ```sql
 CREATE TABLE videos (video_id uuid, added_date timestamp, Title text, PRIMARY KEY (video_id ));
+CREATE TABLE videos_by_tag (tag text, video_id uuid, added_date timestamp, Title text, PRIMARY KEY ((tag),video_id ));
 ```
 
 ### Insert into Table
@@ -88,4 +89,9 @@ COPY videos(video_id, added_date, title)
 TO '/home/ubuntu/labwork/data-files/videos.csv'
 WITH HEADER=TRUE;
 ```
+## Describe a table
+
+    DESCRIBE TABLE videos;
+    
+    
 
