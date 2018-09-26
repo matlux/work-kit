@@ -167,3 +167,31 @@ git tag R_2017-10-24
 git push origin R_2017-10-24
 ```
     
+## How do I make Git ignore file mode (chmod) changes?
+
+    git config core.fileMode false
+    
+From git-config(1):
+
+core.fileMode
+       If false, the executable bit differences between the index and the
+       working copy are ignored; useful on broken filesystems like FAT.
+       See git-update-index(1). True by default.
+The -c flag can be used to set this option for one-off commands:
+
+    git -c core.fileMode=false diff
+And the --global flag will make it be the default behavior for the logged in user.
+
+    git config --global core.fileMode false
+Warning
+core.fileMode is not the best practice and should be used carefully. This setting only covers the executable bit of mode and never the read/write bits. In many cases you think you need this setting because you did something like chmod -R 777, making all your files executable. But in most projects most files don't need and should not be executable for security reasons.
+
+The proper way to solve this kind of situation is to handle folder and file permission separately, with something like:
+
+```
+find . -type d -exec chmod a+rwx {} \; # Make folders traversable and read/write
+find . -type f -exec chmod a+rw {} \;  # Make files read/write
+```
+If you do that, you'll never need to use core.fileMode, except in very rare environment.
+
+Ref: https://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes
