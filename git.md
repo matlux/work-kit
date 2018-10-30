@@ -5,11 +5,11 @@
 ## Generate SSH key
 
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-    
+
 ## Test you ssh key
 
     ssh -vT git@hostname.com -p 4999
-    
+
 ## Set your username with the following command:
 
     git config --global user.name "Billy Everyteen"
@@ -59,6 +59,10 @@ apply patch:
 
     git remote add origin ssh://user@host:1234/srv/git/example
 
+## add an ssh remote
+
+    git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+
 
 ## Viewing all `git diffs` with vimdiff
 
@@ -66,7 +70,7 @@ apply patch:
     git config --global difftool.prompt false
     git config --global alias.d difftool
 
-Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the next file in the changeset. 
+Typing `git d` yields the expected behavior, type `:wq` in vim cycles to the next file in the changeset.
 
 ## How to display changed files on a commit
 
@@ -128,7 +132,7 @@ for a file in particular
 So let’s say we want to go back four commits from our current HEAD, and we want the index.html file.
 
     git show HEAD~4:index.html
-    
+
 or
 
     git checkout 08618129e66127921fbfcbc205a06153c92622fe path/to/file.txt
@@ -166,11 +170,11 @@ or
 git tag R_2017-10-24
 git push origin R_2017-10-24
 ```
-    
+
 ## How do I make Git ignore file mode (chmod) changes?
 
     git config core.fileMode false
-    
+
 From git-config(1):
 
 core.fileMode

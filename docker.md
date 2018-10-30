@@ -52,10 +52,25 @@ docker attach 922ac2f47d93
 ### How to list (running) containers
 
     docker ps
-    
+
+Output example:
+```
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                                                                                        NAMES
+9265bc46c9ce        rabbitmq:3-management   "docker-entrypoint..."   2 hours ago         Up 2 hours          4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   laughing_lamarr
+3c579f0d72f8        mysql:5.7               "docker-entrypoint..."   2 hours ago         Up 2 hours          0.0.0.0:3306->3306/tcp, 33060/tcp          thirsty_fermi
+```    
+
+### How to stop a containers
+
+    docker stop <container id>
+
+for example
+
+    docker stop 9265bc46c9ce
+
 ### How to attach to a background container
 
-    docker attach 922ac2f47d93
+    docker attach 9265bc46c9ce
 
 From docker 1.3 onwards.
 
@@ -78,4 +93,3 @@ or my own baseline
 ```bash
 docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:8042 -p 8088:8088 -p 8020:8020 -p 8888:8888 -p 11000:11000 --hostname=quickstart.cloudera --privileged=true -t -i cloudera/base2017-10-20 /usr/bin/docker-quickstart
 ```
-

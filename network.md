@@ -9,7 +9,7 @@
 ## how to install iptables
 
     sudo apt-get install -y iptables-persistent
-    
+
 ## how to change v4 rules on Debian 8
 
     sudo vim /etc/iptables/rules.v4
@@ -44,6 +44,20 @@ Make sure that the ip forwarding is acutally enabled
 /sbin/iptables -t nat -A PREROUTING -i eth0 -p tcp -d 192.168.98.253 --dport 51413 -j DNAT --to 192.168.76.15:51413
 /sbin/iptables -A FORWARD -p tcp -i eth0 -d 192.168.76.15 --dport 51413 -j ACCEPT
 ```
+
+# UFW
+
+Ref: https://linuxize.com/post/how-to-setup-a-firewall-with-ufw-on-ubuntu-18-04/
+
+```
+sudo apt install ufw
+sudo apt-get install openssh-server
+sudo ufw status verbose
+sudo ufw app list
+sudo ufw enable
+sudo ufw status verbose
+```
+
 
 # routes
 
@@ -82,7 +96,7 @@ INTERFACES="eth0"
 Edit
 
 ```sh
-user> dhcpd.conf 
+user> dhcpd.conf
 ```
 
 ## Starting the DHCP server
@@ -129,7 +143,7 @@ https://help.ubuntu.com/lts/serverguide/openvpn.html
 ## Server installation on Ubuntu
 
     sudo apt-get install openvpn easy-rsa
-    
+
 
 ## How to Setting up your own Certificate Authority (CA) and generating certificates and keys for an OpenVPN server and multiple clients
 
@@ -163,7 +177,7 @@ source vars
 if error above on build-ca add following export to vars file:
 
     export KEY_ALTNAMES="something"
-    
+
 ### Server Certificates
 
 Next, we will generate a certificate and private key for the server:
@@ -173,14 +187,12 @@ Next, we will generate a certificate and private key for the server:
 As in the previous step, most parameters can be defaulted. Two other queries require positive responses, "Sign the certificate? [y/n]" and "1 out of 1 certificate requests certified, commit? [y/n]".
 
     ./build-dh
-    
+
 
 ## Client Certificates
 
     cd /etc/openvpn/easy-rsa/
     source vars
     ./build-key client1
-    
-## 
-    
 
+##
