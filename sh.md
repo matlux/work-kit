@@ -4,13 +4,13 @@
     export PS1='\[\e[36m\]\u\[\e[m\]@\[\e[1;32m\]\H:\[\e[1;33m\]\w\[\e[m\]\n\[\e[1;31m\]\t \[\e[m\]\[\e[35m\][\!:0!]&[\j]\[\e[1;36m\]$\[\e[m\]'
 
 
-## find files not recognised by system. 
+## find files not recognised by system.
 
 Using pipe within find command
 
     find ~/Downloads/*.* -type f -exec sh -c 'file "$1" |grep ": data"' pipo {} \;
-    
-## find none valid jpeg files. 
+
+## find none valid jpeg files.
 
 Using a pipe within a find command
 
@@ -103,7 +103,7 @@ call:
 
 or simplified
 
-    ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk 
+    ps faux | grep -E '(user1|user2)' | grep -v grep | grep 'tangosol' | awk -f test.awk
 
 ## How to see processes belonging to a couple of users
 
@@ -112,7 +112,7 @@ or simplified
 ## How to find a jar file containing a specific file
 
     find . -name "*.jar" | xargs grep -n "engine.properties"
-    
+
 ## How to find a file that contains a specific string
 
     grep --include=\README.{md,txt} -rnw ./ -e 'pattern'
@@ -155,4 +155,32 @@ If you don't change permissions on the file, 'c' would normally correspond to th
    echo "hello" > hello.txt
    ...
    EOT
+```
+
+## Java spark-submit classpath shell runner
+
+```
+#!/bin/bash
+
+LIB_DIR=./lib
+
+LOCAL_PREFIX=""
+PATTERN=$LIB_DIR/*.jar
+for i in $PATTERN; do
+
+    if [ "$i" != "$PATTERN" ]; then
+    	JAR=$LOCAL_PREFIX$i
+    	WIN_JAR=$(echo $LOCAL_PREFIX$i | sed 's#./lib/#.\\lib\\#')
+      UNIX_CLASSPATH=$UNIX_CLASSPATH,$JAR
+      WIN_CLASSPATH=$WIN_CLASSPATH,$WIN_JAR
+  fi
+done
+UNIX_CLASSPATH=`echo $UNIX_CLASSPATH | cut -c2-`
+##echo "UNIX_CLASSPATH: " $UNIX_CLASSPATH
+WIN_CLASSPATH=`echo $WIN_CLASSPATH | cut -c2-`
+##echo "WIN_CLASSPATH: " $WIN_CLASSPATH
+
+
+
+
 ```
