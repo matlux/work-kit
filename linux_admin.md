@@ -206,6 +206,55 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 * mount -t cifs //hal/public /mnt/samba -o iocharset=utf8,username=[username],sec=ntlm
 * partimage -e restore /dev/sda1 /mnt/samba/staff/[username]/D600_training_img.pimg.gz.000
 
+# How to use CloneZilla and partclone
+
+## saving image with CloneZilla
+
+```
+ocs-sr -q2 -c -j2 -z1p -i 4096 -sfsck -senc -p choose savedisk 2018-11-04-16-img nvme0n1
+```
+
+## restore image
+
+```
+cat 2018-11-04-16-img/nvme0n1p7.ext4-ptcl-img.gz.* | gzip -d -c | sudo partclone.ext4 -r -s - -W -O images/restored.img
+```
+
+# How to ext4 + LUKS
+
+```
+sudo apt-get install luksipc
+sudo luksipc -d /dev/nvme0n1p7
+cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 newdisk
+```
+
+# How to keep using Dropbox even if you don’t use unencrypted ext4 (workaround)
+
+https://metabubble.net/linux/how-to-keep-using-dropbox-even-if-you-dont-use-unencrypted-ext4-workaround/
+
+```
+mv Dropbox Dropbox.bak
+mkdir Dropbox
+dd if=/dev/zero of=~/.dropbox/storage bs=1M count=3072
+mkfs.ext4 /home/<username>/.dropbox/storage
+chattr +i /home/<user>/Dropbox
+mkfs.ext4 /home/<username>/.dropbox/storage
+```
+
+in /etc/fstab:
+```
+/home/<username>/.dropbox/storage /home/<username>/Dropbox ext4 defaults,user_xattr,loop 0 0
+```
+
+```
+cp -a Dropbox.bak/* Dropbox/
+```
+
+# How to use Sparse Files
+
+https://wiki.archlinux.org/index.php/sparse_file
+
+
 # install new images
 
 ## router debian
