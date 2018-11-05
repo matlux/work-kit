@@ -218,6 +218,8 @@ ocs-sr -q2 -c -j2 -z1p -i 4096 -sfsck -senc -p choose savedisk 2018-11-04-16-img
 
 ```
 cat 2018-11-04-16-img/nvme0n1p7.ext4-ptcl-img.gz.* | gzip -d -c | sudo partclone.ext4 -r -s - -W -O images/restored.img
+mount images/restored /mnt/olddisk
+sudo rsync -axHAWXS --numeric-ids --info=progress2 /mnt/olddisk/ /mnt/newdisk/
 ```
 
 # How to ext4 + LUKS
