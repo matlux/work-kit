@@ -194,12 +194,13 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 ## How to re-install grub
 
 ```
-cryptsetup open /dev/sda5 my_encrypted_device  # only for luks drive
-mount /dev/mapper/my_encrypted_device /mnt
-mount --bind /dev/ /mnt/dev && mount --bind /dev/pts /mnt/dev/pts && mount --bind /proc /mnt/proc && mount --bind /sys /mnt/sys
-mount /dev/<YOUR_BOOT_PARTITION> /mnt/boot
-mount /dev/sdXX /mnt/boot/efi
-chroot /mnt
+cryptsetup open /dev/nvme0n1p7 cryptoroot  # only for luks drive
+mkdir /mnt/cryptoroot
+mount /dev/mapper/cryptoroot /mnt/cryptoroot
+mount --bind /dev/ /mnt/cryptoroot/dev && mount --bind /dev/pts /mnt/cryptoroot/dev/pts && mount --bind /proc /mnt/cryptoroot/proc && mount --bind /sys /mnt/cryptoroot/sys
+mount /dev/nvme0n1p3 /mnt/cryptoroot/boot
+mount /dev/nvme0n1p1 /mnt/cryptoroot/boot/efi
+chroot /mnt/cryptoroot
 apt purge --auto-remove grub-pc
 Hit Enter to confirm the removal.
 
@@ -224,6 +225,7 @@ Note : sdX = disk | sdXX = efi partition | sdXY = boot partition | sdXXX = syste
 lsblk
 sfdisk -d /dev/nvme0n1
 gparted
+ls -l /dev/disk/by-uuid
 ```
 
 
