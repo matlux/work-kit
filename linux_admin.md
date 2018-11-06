@@ -202,11 +202,18 @@ mount /dev/nvme0n1p3 /mnt/cryptoroot/boot
 mount /dev/nvme0n1p1 /mnt/cryptoroot/boot/efi
 chroot /mnt/cryptoroot
 apt purge --auto-remove grub-pc
-Hit Enter to confirm the removal.
+#Hit Enter to confirm the removal.
 
 apt install grub-pc
 ```
 
+If above does not work try this to force the efi re-install
+```
+apt-get install --reinstall grub-efi-amd64
+```
+
+
+That's an alternative but not as good.
 ```
 sudo mount /dev/sdXXX /mnt
 sudo mount /dev/sdXY /mnt/boot
@@ -216,7 +223,7 @@ sudo chroot /mnt
 grub-install /dev/sdX
 update-grub 
 
-Note : sdX = disk | sdXX = efi partition | sdXY = boot partition | sdXXX = system partition 
+#Note : sdX = disk | sdXX = efi partition | sdXY = boot partition | sdXXX = system partition 
 ```
 
 ## How to find information about disk partitions
