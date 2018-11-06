@@ -189,9 +189,89 @@ For Synology NAS follow [this](http://www.eldemonionegro.com/blog/archivos/2012/
 
 see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 
-# Partimage - How to use it to backup and restor disk images
+# Misc low level disk manipulations
 
-## How to Save image
+## How to re-install grub
+
+```
+cryptsetup open /dev/sda5 my_encrypted_device  # only for luks drive
+mount /dev/mapper/my_encrypted_device /mnt
+mount --bind /dev/ /mnt/dev && mount --bind /dev/pts /mnt/dev/pts && mount --bind /proc /mnt/proc && mount --bind /sys /mnt/sys
+mount /dev/<YOUR_BOOT_PARTITION> /mnt/boot
+mount /dev/sdXX /mnt/boot/efi
+chroot /mnt
+apt purge --auto-remove grub-pc
+Hit Enter to confirm the removal.
+
+apt install grub-pc
+```
+
+```
+sudo mount /dev/sdXXX /mnt
+sudo mount /dev/sdXY /mnt/boot
+sudo mount /dev/sdXX /mnt/boot/efi
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+sudo chroot /mnt
+grub-install /dev/sdX
+update-grub 
+
+Note : sdX = disk | sdXX = efi partition | sdXY = boot partition | sdXXX = system partition 
+```
+
+## How to find information about disk partitions
+
+```
+lsblk
+sfdisk -d /dev/nvme0n1
+gparted
+```
+
+
+## copy useful examples
+
+### copy preserving all attributes and links (useful for root copy)
+
+    sudo rsync -axHAWXS --numeric-ids --info=progress2 /mnt/olddisk/ /mnt/newdisk/
+    
+ref: https://superuser.com/questions/307541/copy-entire-file-system-hierarchy-from-one-drive-to-another
+
+
+## Mount useful examples
+
+### readonly
+
+    sudo mount -o ro /dev/sda1 /media/2tb
+    
+
+
+## How to ext4 + LUKS
+
+```
+sudo apt-get install luksipc
+sudo luksipc -d /dev/nvme0n1p7
+cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 cryptoroot
+mkfs -t ext4 /dev/mapper/cryptroot
+```
+### open luks partition
+
+    cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 cryptoroot
+
+### close LUKS partition
+
+    cryptsetup close cryptoroot
+
+
+### list keys
+
+    cryptsetup luksDump /dev/<device> | grep BLED
+    
+### add key
+
+    cryptsetup luksAddKey /dev/<device> (/path/to/<additionalkeyfile>)
+
+## Partimage - How to use it to backup and restor disk images
+
+### How to Save image
 
 * mkdir /mnt/samba
 * mount -t cifs //hal/public /mnt/samba -o uid=1000,iocharset=utf8,username=[username],password=[password],sec=ntlm
@@ -199,7 +279,7 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 * dd if=/dev/hda of=/mnt/samba/staff/[username]/sda.mbr count=1 bs=512
 * sfdisk -d /dev/hda > /mnt/samba/staff/[username]/sda.pt
 
-## How To Restore:
+### How To Restore:
 * dd if=/mnt/samba/staff/[username]/sda.mbr of=/dev/sda
 * sfdisk /dev/hda < /mnt/samba/staff/[username]/sda.pt
 * mkdir /mnt/samba
@@ -222,13 +302,6 @@ mount images/restored /mnt/olddisk
 sudo rsync -axHAWXS --numeric-ids --info=progress2 /mnt/olddisk/ /mnt/newdisk/
 ```
 
-# How to ext4 + LUKS
-
-```
-sudo apt-get install luksipc
-sudo luksipc -d /dev/nvme0n1p7
-cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 newdisk
-```
 
 # How to keep using Dropbox even if you don’t use unencrypted ext4 (workaround)
 
