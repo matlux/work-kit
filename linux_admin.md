@@ -205,6 +205,42 @@ apt purge --auto-remove grub-pc
 #Hit Enter to confirm the removal.
 
 apt install grub-pc
+
+grub-install /dev/nvme0n1
+update-grub 
+update-initramfs -k all -c
+```
+
+/etc/crypttab
+
+    cat /etc/crypttab
+    
+```
+cat /etc/crypttab
+#cryptswap1 UUID=6e21de8a-d5b5-42d5-aadf-34cbc78c4d74 /dev/urandom swap,offset=1024,cipher=aes-xts-plain64
+cryptoroot UUID=69ffeee2-ce39-4acc-9389-6c8638e3b048 none luks
+```
+
+/etc/fstab
+
+    cat /etc/fstab
+
+```
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/nvme0n1p7 during installation
+/dev/mapper/cryptoroot /               ext4    errors=remount-ro 0       1
+
+# /boot/efi was on /dev/nvme0n1p1 during installation
+UUID=7420-AA7C  /boot/efi       vfat    umask=0077      0       1
+#/dev/mapper/cryptswap1 none swap sw 0 0
+/swapfile none swap sw 0 0
+
 ```
 
 If above does not work try this to force the efi re-install
@@ -261,6 +297,9 @@ sudo luksipc -d /dev/nvme0n1p7
 cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 cryptoroot
 mkfs -t ext4 /dev/mapper/cryptroot
 ```
+
+
+
 ### open luks partition
 
     cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 cryptoroot
