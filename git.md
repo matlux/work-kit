@@ -53,7 +53,9 @@ apply patch:
 
 ### Alias to display aliases
 
+```
     git config --global alias.alias "config --get-regexp 'alias.*'"
+```
 
 ## add an ssh remote
 
@@ -62,6 +64,10 @@ apply patch:
 ## add an ssh remote
 
     git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+
+## How to disable TLS/SSL verification for a single git command
+
+    git -c http.sslVerify=false clone https://example.com/path/to/git
 
 
 ## Viewing all `git diffs` with vimdiff
