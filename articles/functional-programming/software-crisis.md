@@ -13,6 +13,13 @@ Here is a recap: http://bernhardwenzel.com/articles/out-of-the-tar-pit/
 ## "Simple Made Easy"
 
 Similar flavour of the software crisis problem viewed by Rich Hickey the author of Clojure.
-"Simple Made Easy" is a recommended talk which emphasise on the value of simple vs easy (easy can lead to complexity) in order to manage your long term software development. 
+"Simple Made Easy" is a recommended talk which emphasise on the value of simple vs easy (easy can lead to complexity) in order to manage your long term software development.
 
 https://www.infoq.com/presentations/Simple-Made-Easy
+
+## FUNDAMENTAL CONCEPTS IN PROGRAMMING LANGUAGES
+Christopher Strachey
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.332.3161&rep=rep1&type=pdf
+
+## What is referential transparency?
+https://stackoverflow.com/questions/210835/what-is-referential-transparency
