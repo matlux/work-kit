@@ -2,6 +2,10 @@
 
 # git tips
 
+## How to Git interactive merge
+
+    git merge --no-commit --no-ff branch-to-merge
+
 ## Generate SSH key
 
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
