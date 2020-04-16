@@ -162,6 +162,8 @@ For Synology NAS follow [this](http://www.eldemonionegro.com/blog/archivos/2012/
 ## find a port open by a process
 
     lsof -i tcp:8000
+    
+    lsof -nP -i4TCP | grep LISTEN
 
     netstat -tulpn | grep 8000
 
