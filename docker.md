@@ -110,3 +110,6 @@ docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:80
     docker-credential-gcr gcr-logout
     
 --> ~/.config/gcloud/docker_credentials.json is deleted
+
+
+
