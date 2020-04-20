@@ -60,6 +60,14 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 3c579f0d72f8        mysql:5.7               "docker-entrypoint..."   2 hours ago         Up 2 hours          0.0.0.0:3306->3306/tcp, 33060/tcp          thirsty_fermi
 ```    
 
+### how to list the ip addresses of all the containers
+
+    docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done
+    
+### how to list the ip addresses of one container by name
+    
+    docker inspect --format '{{ .NetworkSettings.Networks.dockerdevstack_default.IPAddress }}' <name of container>
+
 ### How to stop a containers
 
     docker stop <container id>
