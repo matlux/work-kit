@@ -101,12 +101,38 @@ docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:80
 
     docker-compose up -d
     
+### With override files
+    
+    docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
     
 ## tear down
 
     docker-compose stop
-    
-    
+
+## tail logs
+
+    docker-compose logs -f <name of service>
+
+## open terminal on container via docker-compose
+
+    docker-compose exec <name of service> bash
+
+
+
+# Google Cloud authentication
+
+
+## Login
+
+Authenticate docker with gcr by downloading for your platform docker-credential-gcr and add it to your path: https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases
+
+Run the docker-credential-gcr tool to configure and authenticate docker with gcloud.
+
+    docker-credential-gcr configure-docker
+    docker-credential-gcr gcr-login    
+
+## Logout
+
     docker-credential-gcr gcr-logout
     
 --> ~/.config/gcloud/docker_credentials.json is deleted
