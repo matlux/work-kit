@@ -181,6 +181,8 @@ WIN_CLASSPATH=`echo $WIN_CLASSPATH | cut -c2-`
 ##echo "WIN_CLASSPATH: " $WIN_CLASSPATH
 
 
+## How to download a redirected file and turn off sslVerify
 
+    curl -L -O <URL> -k
 
 ```

@@ -1,6 +1,10 @@
 
 ## Always Implement Immutable Class
 
+In Effective Java, Joshua Bloch makes this compelling recommendation :
+"Classes should be immutable unless there's a very good reason to make them mutable....If a class cannot be made immutable, limit its mutability as much as possible."
+
+
 
 ### Anti-pattern -
 
