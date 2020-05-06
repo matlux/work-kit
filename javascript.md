@@ -14,7 +14,7 @@ yarn add -ED @types/node-gzip
 
     yarn test
 
-## quickly setup a javascript express end point
+## How to quickly setup a javascript express end point project
 
 
 run
@@ -35,3 +35,34 @@ app.get("/", (req, res) => {
 });
 app.listen(3001);
 ```
+
+## How to setup a Typescript node project
+
+ref: https://khalilstemmler.com/blogs/typescript/node-starter-project/
+
+```
+mkdir typescript-starter
+cd typescript-starter
+```
+
+### Setup `Node.js` `package.json`
+Using the -y flag when creating a package.json will simply approve all the defaults.
+
+    npm init -y
+    
+### Add TypeScript as a dev dependency
+
+    npm install typescript --save-dev
+
+### Install ambient Node.js types for TypeScript
+
+    npm install @types/node --save-dev
+    
+### Create a `tsconfig.json`
+
+```
+npx tsc --init --rootDir src --outDir build \
+--esModuleInterop --resolveJsonModule --lib es6 \
+--module commonjs --allowJs true --noImplicitAny true
+```
+
