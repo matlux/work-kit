@@ -1,4 +1,18 @@
+## How to add a typescript dependency to a node project
 
+```
+yarn add -E memjs
+yarn add -ED @types/memjs
+```
+other example:
+```
+yarn add -E node-gzip
+yarn add -ED @types/node-gzip
+```
+
+## How to run tests
+
+    yarn test
 
 ## quickly setup a javascript express end point
 
