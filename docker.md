@@ -101,7 +101,11 @@ or my own baseline
 ```bash
 docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:8042 -p 8088:8088 -p 8020:8020 -p 8888:8888 -p 11000:11000 --hostname=quickstart.cloudera --privileged=true -t -i cloudera/base2017-10-20 /usr/bin/docker-quickstart
 ```
+# Useful Docker images to start quickly for development
 
+## How to start a Memcached container for local dev on the host
+
+    docker run --name some-memcached -p 11211:11211 -d  memcached
 
 # Docker Compose
 
