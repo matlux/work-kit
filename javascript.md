@@ -12,7 +12,13 @@ yarn add -ED @types/node-gzip
 
 ## How to run tests
 
+### with Yarn
+
     yarn test
+
+### with a specific test with Node
+
+    npm run test -- src/layout.test.ts
 
 ## How to quickly setup a javascript express end point project
 
