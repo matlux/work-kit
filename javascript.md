@@ -72,3 +72,20 @@ npx tsc --init --rootDir src --outDir build \
 --module commonjs --allowJs true --noImplicitAny true
 ```
 
+# Sanity
+
+##  export
+
+    sanity dataset export documentation
+    
+## create document
+
+Change editor if needed
+    export EDITOR=$(which subl)
+    
+    
+    sanity documents create --id everythingDocument --watch --replace --dataset documentation
+
+## Edit json with javascrip Chrome console
+
+    copy(JSON.stringify(everything.filter(row => row._type === 'page').flatMap(row => row.shelves), null, 2))
