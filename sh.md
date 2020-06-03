@@ -186,3 +186,10 @@ WIN_CLASSPATH=`echo $WIN_CLASSPATH | cut -c2-`
     curl -L -O <URL> -k
 
 ```
+
+## tmux stuff
+
+```
+alias x='cd ~/datashare/dev/resourceguru; tmux -u -2 a -d -t x || tmux -u -2 new -s x'
+alias y='cd ~/datashare/dev; tmux -u -2 a -d -t y || tmux -u -2 new -s y'
+```
