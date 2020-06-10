@@ -10,6 +10,10 @@ yarn add -E node-gzip
 yarn add -ED @types/node-gzip
 ```
 
+other example:
+
+    yarn add emotion
+
 ## How to run tests
 
 ### with Yarn
