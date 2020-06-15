@@ -19,6 +19,12 @@ or
 npm install -g yarn
 ```
 
+## install next
+
+```
+yarn add next
+```
+
 ## How to add a typescript dependency to a node project
 
 ```
