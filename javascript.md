@@ -1,3 +1,24 @@
+## How to install npm, nodejs and n and yarn
+
+
+```
+sudo apt install nodejs npm
+npm install -g n
+n 12.13.0
+n lts
+```
+
+### install yarn
+```
+sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+sudo sh -c "echo 'deb https://dl.yarnpkg.com/debian/ stable main' >> /etc/apt/sources.list"
+sudo apt update
+```
+or
+```
+npm install -g yarn
+```
+
 ## How to add a typescript dependency to a node project
 
 ```
