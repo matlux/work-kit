@@ -1,4 +1,28 @@
+# local Network scan
 
+## arp-scan
+
+    sudo arp-scan -l -I enp0s25
+
+## nbtscan
+
+    nbtscan 192.168.0.0/24
+    
+## avahi-browse
+
+    avahi-browse -at
+
+# SSH server how to install
+
+ref: https://linuxconfig.org/ubuntu-20-04-ssh-server
+
+```
+sudo apt install openssh-server
+systemctl status sshd
+sudo systemctl restart ssh
+sudo ufw allow ssh
+sudo systemctl enable ssh
+```
 
 # iptables
 
