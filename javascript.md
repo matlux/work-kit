@@ -19,6 +19,13 @@ or
 npm install -g yarn
 ```
 
+## How to install a mini web server with npm
+
+```
+npm install -g npx
+npx serve
+```
+
 ## install next
 
 ```
