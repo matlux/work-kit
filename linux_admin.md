@@ -195,10 +195,16 @@ see [this](http://www.dotnetperls.com/7-zip-examples) for more details
 
 ## How to setup swap on encrypted ext4 luks file system as a file
 
+### create, format and activate swap file
 ```
 sudo fallocate -l 32G /swapfile 
 sudo mkswap /swapfile 
 sudo swapon /swapfile
+```
+
+### deactivate swap file
+```
+sudo swapoff -v /swapfile
 ```
 
 ref: https://askubuntu.com/questions/248158/how-do-i-setup-an-encrypted-swap-file
