@@ -12,18 +12,6 @@
 
     avahi-browse -at
 
-# SSH server how to install
-
-ref: https://linuxconfig.org/ubuntu-20-04-ssh-server
-
-```
-sudo apt install openssh-server
-systemctl status sshd
-sudo systemctl restart ssh
-sudo ufw allow ssh
-sudo systemctl enable ssh
-```
-
 # iptables
 
 ## ref
