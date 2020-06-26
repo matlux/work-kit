@@ -68,6 +68,18 @@ Edit the /etc/fstab file and add a line like:
 
 # SSH stuff
 
+## SSH server how to install
+
+ref: https://linuxconfig.org/ubuntu-20-04-ssh-server
+
+```
+sudo apt install openssh-server
+systemctl status sshd
+sudo systemctl restart ssh
+sudo ufw allow ssh
+sudo systemctl enable ssh
+```
+
 ## ssh tuneling
 
     ssh -L22222:localhost:222 remoteuser@remotehost
