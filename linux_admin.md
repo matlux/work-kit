@@ -316,7 +316,18 @@ cryptsetup luksOpen --key-file /root/initial_keyfile.bin /dev/nvme0n1p7 cryptoro
 mkfs -t ext4 /dev/mapper/cryptroot
 ```
 
+## How to Encrypt ext4 + LUKS
 
+ref:
+http://blog.alanporter.com/2011-04-25/crypto-root/
+https://help.ubuntu.com/community/Full_Disk_Encryption_Howto_2019
+https://unix.stackexchange.com/questions/560439/how-to-encrypt-external-disk-without-backup-restore-the-existing-data
+
+```
+sudo -i
+apt-get install cryptsetup
+cryptsetup luksFormat --type=luks1 ${DEV}p1
+```
 
 ### open luks partition
 
