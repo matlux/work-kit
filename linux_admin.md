@@ -209,6 +209,27 @@ sudo swapoff -v /swapfile
 
 ref: https://askubuntu.com/questions/248158/how-do-i-setup-an-encrypted-swap-file
 
+## How to install Rescue ISO boots with grub2
+
+ref: https://help.ubuntu.com/community/Grub2/ISOBoot
+
+### Install grml-rescueboot
+
+```
+sudo apt-get install grml-rescueboot
+```
+
+Place bootable ISO files in the /boot/grml folder.
+
+```
+sudo mv ~/Downloads/<filename.iso> /boot/grml/
+```
+
+Update Grub
+```
+sudo update-grub
+```
+
 ## How to re-install grub
 
 ```
