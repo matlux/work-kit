@@ -1,5 +1,13 @@
 
+## install minecraft on ubuntu
 
+ref: https://vitux.com/install-minecraft-on-ubuntu/
+
+```
+wget -o Minecraft.deb https://launcher.mojang.com/download/Minecraft.deb
+sudo apt install gdebi-core
+sudo gdebi Minecraft.deb
+```
 
 ## start local server from scratch
 
