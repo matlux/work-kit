@@ -117,13 +117,21 @@ docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:80
     
     docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
     
-## tear down
+## tear down the whole stack
 
-    docker-compose stop
+    docker-compose down
+    
+## tear down service
+
+    docker-compose stop <name of my service>
 
 ## tail logs
 
     docker-compose logs -f <name of service>
+    
+## combine docker-compose up with logs
+
+    docker-compose up -d && docker-compose logs -f
 
 ## open terminal on container via docker-compose
 
