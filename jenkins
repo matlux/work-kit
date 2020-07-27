@@ -1,0 +1,16 @@
+
+
+# jenkinsfile_pr_check.md
+
+ref: https://gist.github.com/alces/fee73ad3a91bd44c75a57a3d5676307d
+
+
+1. in *Jenkins* set up a multibranch pipeline with *Branch source* of type `Github`
+   (under it, set up endpoint, credentials, repo name, etc.);
+2. in *Github* go to the repository *Settings* and add the user chosen on the previous step to the repository's colaborators;
+3. go to the *Hooks* menu and add a webhook pointing to `<your-jenkins-host>/github-webhook/` and select *pull request* event
+   under *Let me select individual events* option;
+4. create a pull request - after that Jenkins should automatically start a build;
+5. go to *Branches* menu under *Settings* and add the target branch to *Protected branches*;
+6. choose *Require status checks to pass before merging* and `continuous-integration/jenkins/pr-merge` under it
+7. commit a change into the pull request and see the Jenkins build result on the page.
