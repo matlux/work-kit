@@ -46,7 +46,14 @@ yarn add -ED @types/node-gzip
 
 other example:
 
+    yarn add <package...>
+    
     yarn add emotion
+    
+    
+### add dev only dependency with yarn
+
+    yarn add <package...> --dev
 
 ## How to run tests
 
