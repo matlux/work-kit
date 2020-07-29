@@ -1,6 +1,22 @@
 
+## How to get security credentials from jenkins
 
-# jenkinsfile_pr_check.md
+## Get security credential for Docker from Jenkins
+
+```
+http://<jenkins.host>/credentials/store/system/domain/_/credential/<key>/update
+```
+Use Chrome dev tool to get password in the DOM
+
+
+```
+http://<jenkins.host>/script
+println(hudson.util.Secret.decrypt("{AQAAABAAAAkQx4rgGr....iwslX4LYm09bEMpgrJCPp4=}"))
+
+```
+
+
+## jenkinsfile_pr_check.md
 
 ref: https://gist.github.com/alces/fee73ad3a91bd44c75a57a3d5676307d
 
