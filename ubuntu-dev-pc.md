@@ -20,10 +20,27 @@ sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 sudo apt install sublime-text
 ```
 
+## Install vs-code
+
+```
+sudo snap install --classic code
+```
+
 ## Install Skype
 
 ```
 sudo snap install skype --classic
+```
+## xournal++
+
+```
+sudo snap install xournalpp
+```
+
+## Zoom
+
+```
+sudo snap install zoom-client
 ```
 
 ## Install grml-rescueboot
