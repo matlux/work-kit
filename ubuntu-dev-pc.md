@@ -117,6 +117,13 @@ java -jar OptiFine_1.13.2_HD_U_F5.jar
 ## install and restart normal launcher
 ```
 
+### How to install Spotify
+
+```
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+```
+
 ### chrome
 ref: https://linuxize.com/post/how-to-install-google-chrome-web-browser-on-ubuntu-20-04/
 
