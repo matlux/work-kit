@@ -158,4 +158,18 @@ Run the docker-credential-gcr tool to configure and authenticate docker with gcl
 --> ~/.config/gcloud/docker_credentials.json is deleted
 
 
+## Purging All Unused or Dangling Images, Containers, Volumes, and Networks
+
+ref: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes#:~:text=Remove%20all%20images,docker%20images%20%2Da
+
+Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
+
+    docker system prune
+ 
+To additionally remove any stopped containers and all unused images (not just dangling images), add the -a flag to the command:
+
+    docker system prune -a
+    
+
+
 
