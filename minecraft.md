@@ -23,9 +23,9 @@ ctrl+b d
 tmux a -t minecraftsession
 ```
 
-WIP
+### Where to find the latest version of the server
 
-    minecraft_server.1.15.2.jar
+https://www.minecraft.net/en-us/download/server/
 
 
 ## Launch my server onto Amazone EC2 (AWS)
