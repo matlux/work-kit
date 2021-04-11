@@ -23,3 +23,6 @@ http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.332.3161&rep=rep1&type=
 
 ## What is referential transparency?
 https://stackoverflow.com/questions/210835/what-is-referential-transparency
+
+
+## History of Lisp, John McCarthy 1979

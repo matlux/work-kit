@@ -1,40 +1,5 @@
 
 
-## How to install and use boot2docker on Mac
-
-see http://penandpants.com/2014/03/09/docker-via-homebrew/
-
-```bash
-brew cask install virtualbox
-brew install docker
-brew install boot2docker
-boot2docker init
-boot2docker -v up
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/mathieu/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
-boot2docker ssh
-sudo curl -o /var/lib/boot2docker/profile https://gist.githubusercontent.com/garthk/d5a17007c277aa5c76de/raw/3d09c77aae38b4f2809d504784965f5a16f2de4c/profile
-exit
-boot2docker down
-boot2docker -v up
-```
-
-See http://stackoverflow.com/questions/30980474/docker-complains-about-invalid-certificate-after-update-to-v1-7-0 for hack
-
-```bash
-wait4eth1() {
-        CNT=0
-        until ip a show eth1 | grep -q UP
-        do
-                [ $((CNT++)) -gt 60 ] && break || sleep 1
-        done
-        sleep 1
-}
-wait4eth1
-```
 
 ## How to build the cdh container?
 
@@ -101,7 +66,31 @@ or my own baseline
 ```bash
 docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:8042 -p 8088:8088 -p 8020:8020 -p 8888:8888 -p 11000:11000 --hostname=quickstart.cloudera --privileged=true -t -i cloudera/base2017-10-20 /usr/bin/docker-quickstart
 ```
+
+# How to start an image
+
+    docker run -ti YOUR_IMAGE /bin/sh
+
+    docker run -ti --entrypoint /bin/sh YOUR_IMAGE
+
 # Useful Docker images to start quickly for development
+
+## gcc
+
+    docker run  -it gcc:8.2 sh
+
+run mount local volume
+
+    docker run -it -v $(pwd):/app  gcc:8.2 sh
+
+
+## ubuntu
+
+    docker run -t -i -v <host_dir>:<container_dir>  ubuntu /bin/bash
+
+## run retrace base image
+
+    docker run -it -v $(pwd):/app retrace-base-image:0.2 bash
 
 ## How to start a Memcached container for local dev on the host
 

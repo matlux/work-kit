@@ -20,6 +20,12 @@ sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 sudo apt install sublime-text
 ```
 
+## Install Intellij
+
+```
+sudo snap install intellij-idea-community --classic
+```
+
 ## Install vs-code
 
 ```
@@ -90,6 +96,7 @@ sudo apt install htop vim
 ```
 sudo apt install docker.io
 sudo usermod -aG docker mathieu
+sudo apt install docker-compose
 ```
 
 restart machine
@@ -136,6 +143,7 @@ alias cd-guru='cd ~/datashare/dev/resourceguru/guru-website/'
 alias cd-guru-docker='cd ~/projects/resource_guru/guru-website/'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+export PATH=~/.npm-global/bin:$PATH
 ```
 
 alternatively
@@ -184,6 +192,15 @@ sudo enter-chroot -u root
 that will pit you inside the chroot as root. then just
 
 passwd <username>
+```
+
+### Install npm
+
+```
+sudo apt install npm
+npm install -g n
+n lts
+npm install -g yarn
 ```
 
 ### Aliases

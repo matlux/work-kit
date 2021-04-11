@@ -84,3 +84,8 @@ Vagrant-Manager helps you manage all your virtual machines in one place directly
 https://medium.com/crowdbotics/a-complete-one-by-one-guide-to-install-docker-on-your-mac-os-using-homebrew-e818eb4cfc3
 
 
+## install clojure
+
+```
+brew install clojure/tools/clojure
+```
