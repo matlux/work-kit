@@ -70,6 +70,10 @@ Using a pipe within a find command
       tail --bytes=5120 ~/logs/grid.log
       sleep 2
     done
+    
+## How to tunnel into A computer to forward a port
+
+   ssh -L 0.0.0.0:1234:192.168.192.136:1234 192.168.192.136
 
 ## remove empty strings
 
