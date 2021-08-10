@@ -83,6 +83,9 @@ sudo systemctl enable ssh
 ## ssh tuneling
 
     ssh -L22222:localhost:222 remoteuser@remotehost
+    
+example:
+    ssh -L 0.0.0.0:1234:192.168.192.136:1234 192.168.192.136
 
 ## How to change ssh key passphrase
 
