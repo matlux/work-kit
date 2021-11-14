@@ -11,9 +11,21 @@ sudo gdebi Minecraft.deb
 
 ## start local server from scratch
 
-WIP
 
-    minecraft_server.1.15.2.jar
+ref: https://phoenixnap.com/kb/minecraft-dedicated-server
+
+```
+wget https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
+mv server.jar minecraft_server.1.16.4.jar
+tmux new -s minecraftsession
+java -Xmx1024M -Xms1024M -jar minecraft_server.1.16.4.jar nogui
+ctrl+b d
+tmux a -t minecraftsession
+```
+
+### Where to find the latest version of the server
+
+https://www.minecraft.net/en-us/download/server/
 
 
 ## Launch my server onto Amazone EC2 (AWS)
