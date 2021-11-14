@@ -150,6 +150,7 @@ Run the docker-credential-gcr tool to configure and authenticate docker with gcl
 ## Purging All Unused or Dangling Images, Containers, Volumes, and Networks
 
 ref: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes#:~:text=Remove%20all%20images,docker%20images%20%2Da
+ref: https://docs.docker.com/config/pruning/#:~:text=Prune%20containers&text=A%20stopped%20container's%20writable%20layers,the%20docker%20container%20prune%20command.&text=y%2FN%5D%20y-,By%20default%2C%20you%20are%20prompted%20to%20continue.,f%20or%20%2D%2Dforce%20flag.
 
 Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
 
