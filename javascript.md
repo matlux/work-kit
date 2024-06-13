@@ -1,11 +1,18 @@
 ## How to install npm, nodejs and n and yarn
 
-
+### on Linux
 ```
 sudo apt install nodejs npm
 npm install -g n
 n 12.13.0
+n 16.13.0
 n lts
+```
+## On MacOs
+
+
+```
+brew install node
 ```
 
 ### install yarn
@@ -117,6 +124,30 @@ npx tsc --init --rootDir src --outDir build \
 --module commonjs --allowJs true --noImplicitAny true
 ```
 
+
+# AngularJs
+
+## installing AngularJS cli
+
+    npm install -g @angular/cli
+
+# NestJS (Angular-university)
+
+## on client
+
+    npm install
+    npm start
+
+## on server
+
+### in prod mode
+
+    npm run build
+    node dist/src/main.js
+
+### in auto reload mode
+
+    npm run server
 # Sanity
 
 ##  export

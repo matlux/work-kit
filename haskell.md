@@ -15,3 +15,10 @@ Map
 
 
 Monad are Applicative are Functor
+
+
+
+
+
+
+data foobar
