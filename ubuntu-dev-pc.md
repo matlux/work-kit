@@ -26,6 +26,14 @@ sudo apt install sublime-text
 sudo snap install intellij-idea-community --classic
 ```
 
+or 
+
+```
+sudo add-apt-repository ppa:mmk2410/intellij-idea-community
+sudo apt update
+sudo apt install intellij-idea-community
+```
+
 ## Install vs-code
 
 ```
