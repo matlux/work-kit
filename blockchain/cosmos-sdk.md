@@ -110,25 +110,25 @@ When you use the `--keyring-backend test` flag, you are indicating that the keys
 
 1. **Key Generation**:
    ```bash
-   utctestchaind keys add joiningvalidator --keyring-backend test
+   minid keys add joiningvalidator --keyring-backend test
    ```
    This command creates a new key named `joiningvalidator` and stores it in the in-memory keyring. If you restart the node or session, the key will be lost.
 
 2. **Querying Key Information**:
    ```bash
-   utctestchaind keys show joiningvalidator --keyring-backend test -a
+   minid keys show joiningvalidator --keyring-backend test -a
    ```
    This command retrieves the address associated with the `joiningvalidator` key from the in-memory keyring.
 
 3. **Sending Tokens**:
    ```bash
-   utctestchaind tx bank send cosmos1z2epxhjn6qrg0uca6j0rq7llupe3n0nllq6mxe cosmos1qrja75da6xdzgkerzwyaey7scwltras386ly6c 10000000utctest --fees 50000utctest --chain-id utctestchain --keyring-backend test --from myvalidator
+   minid tx bank send cosmos1z2epxhjn6qrg0uca6j0rq7llupe3n0nllq6mxe cosmos1qrja75da6xdzgkerzwyaey7scwltras386ly6c 10000000utctest --fees 50000utctest --chain-id utctestchain --keyring-backend test --from myvalidator
    ```
    This command sends tokens from `myvalidator` to `joiningvalidator`, using keys stored in the in-memory keyring.
 
 4. **Creating a Validator**:
    ```bash
-   utctestchaind tx staking create-validator ./joiningvalidator.json --from joiningvalidator --fees 50000utctest --chain-id utctestchain --keyring-backend test
+   minid tx staking create-validator ./joiningvalidator.json --from joiningvalidator --fees 50000utctest --chain-id utctestchain --keyring-backend test
    ```
    This command creates a new validator using the `joiningvalidator` key stored in the in-memory keyring.
 
@@ -145,3 +145,71 @@ When you use the `--keyring-backend test` flag, you are indicating that the keys
 ### Summary
 
 Using `--keyring-backend test` in each command indicates that you are working in a development or testing environment where ease of use and setup speed are prioritized over security. This backend is not suitable for production, where secure storage mechanisms provided by the `os` or `file` backends should be used.
+
+
+## Does a binaryd export command be used as a new genesis ?
+
+Questions: Can I use minid export output as a new genesis file to bootstrap another chain-id with?
+Does it act as a compaction of the blockchain when upgrade to the keepers are needed?
+
+
+Yes, you can use the `minid export` output as a new genesis file to bootstrap another chain with a different chain ID. This process is often used when upgrading a blockchain, performing state migrations, or setting up a new chain from an existing state.
+
+### Using `minid export` for Bootstrapping a New Chain
+
+1. **Exporting the State**:
+   - When you run the command:
+     ```bash
+     minid export
+     ```
+   - This command exports the current state of the blockchain into a JSON format that resembles a genesis file. This exported state includes all the accounts, balances, staking information, module states, and other critical data that represent the current state of the blockchain.
+
+2. **Creating a New Genesis File**:
+   - The output from `minid export` can be saved as a new genesis file (`genesis.json`). This genesis file can then be used to initialize a new chain:
+     ```bash
+     minid init new-chain --chain-id <new-chain-id>
+     ```
+   - After initialization, replace the newly created genesis file with the exported one:
+     ```bash
+     cp exported_genesis.json ~/.minid/config/genesis.json
+     ```
+   - Update the chain ID in the new genesis file to match the desired new chain ID:
+     ```json
+     {
+       "chain_id": "<new-chain-id>",
+       ...
+     }
+     ```
+   - Start the new chain with the updated genesis file:
+     ```bash
+     minid start
+     ```
+
+3. **Bootstrapping a New Chain**:
+   - By using the modified genesis file, you effectively bootstrap a new blockchain that starts from the state of the previous chain. This new chain can have a different chain ID and can undergo changes such as upgraded keepers, modules, or parameters.
+
+### Acting as a Compaction of the Blockchain
+
+When upgrading to new versions of keepers or performing major state migrations, the `export` and re-import process acts similarly to a compaction of the blockchain:
+
+1. **State Compaction**:
+   - **Old State to Genesis**: The `export` process extracts the current application state, effectively summarizing the blockchain's state without the full history of transactions.
+   - **Genesis Initialization**: When this exported state is used as a new genesis file, the new chain starts with only the latest state, dropping the historical blocks and reducing the overall storage size.
+
+2. **Upgrading Keepers**:
+   - If the new version of your application introduces changes in the data structures or logic of keepers, using the export and import method allows for a clean state initialization with the updated keepers without needing a hard fork.
+   - This approach is often cleaner than in-place migrations, as it avoids complex upgrade logic embedded within the modules.
+
+3. **Practical Steps for Upgrades**:
+   - **Export the current state** using `minid export`.
+   - **Modify the exported genesis** for any required parameter changes, including updating the chain ID, if needed.
+   - **Update software** to the new version that includes the upgraded keepers or module changes.
+   - **Initialize the new chain** with the updated genesis file, effectively starting a new chain from the latest state of the previous chain.
+
+### Key Considerations
+
+- **Consensus**: Ensure that validators and other participants are aligned on the new genesis file and chain ID to avoid splits.
+- **Governance**: If applicable, ensure that the transition is agreed upon via governance mechanisms to maintain consensus among stakeholders.
+- **Testing**: Test the new genesis and upgraded software in a staging environment to ensure compatibility and correctness before deploying it on the mainnet.
+
+By using this process, you effectively restart the blockchain with a "compacted" state, without the burden of historical data, making it suitable for upgrades, state migrations, and launching new chains.

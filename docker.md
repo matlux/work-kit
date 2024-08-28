@@ -69,9 +69,9 @@ docker run -v /home/mathieu/datashare/dev:/home/mathieu/datashare/dev -p 8042:80
 
 # How to start an image
 
-    docker run -ti YOUR_IMAGE /bin/sh
+    docker run -it YOUR_IMAGE /bin/sh
 
-    docker run -ti --entrypoint /bin/sh YOUR_IMAGE
+    docker run -it --entrypoint /bin/sh YOUR_IMAGE
 
 # Useful Docker images to start quickly for development
 
@@ -95,6 +95,15 @@ run mount local volume
 ## How to start a Memcached container for local dev on the host
 
     docker run --name some-memcached -p 11211:11211 -d  memcached
+
+
+## How to copy files from inside a running docker container
+
+```
+docker cp $CONTAINER_ID:/root/.utctestchain /tmp/.utctestchain
+
+```
+
 
 # Docker Compose
 

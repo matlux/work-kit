@@ -1,4 +1,17 @@
 
+## Go reference documentations
+
+https://go.dev/blog/slices-intro
+
+## Go quick web enabled playground
+
+https://go.dev/play/
+
+
+## Go Testing documentation
+
+https://pkg.go.dev/testing
+
 ## test project from commandline
 
 go to project directory and run

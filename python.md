@@ -1,5 +1,42 @@
 
 
+
+#### Step 2: Create a Virtual Environment
+Create a virtual environment to manage the dependencies for the project:
+
+```bash
+python3.12 -m venv venv
+```
+
+#### Step 3: Activate the Virtual Environment
+Activate the virtual environment:
+
+```bash
+source venv/bin/activate
+```
+
+#### Step 4: Install Dependencies
+Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Running the Application
+Explain how to run the application. For instance:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Running Tests
+Describe how to run the automated tests for this system:
+
+```bash
+python -m unittest discover
+```
+
+
 ## Start a simple server
 
     python -m SimpleHTTPServer
