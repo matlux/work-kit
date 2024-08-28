@@ -12,12 +12,12 @@ curl 'http://0.0.0.0:26657/validators?' | jq '.'
 
 Question:
 just before I create the validator on the second node, I need to find a public key on the second node with this:
- matluxchaind tendermint show-validator
+ minid tendermint show-validator
 
 What is exactly that public key? I thought the validator wasn't created yet...
 
 Answer:
-The public key obtained from running `matluxchaind tendermint show-validator` on the second node is the public key of the Tendermint consensus engine for that node. This key is generated when you initialize the node, and it is essential for associating the validator with the specific node that will participate in the consensus process.
+The public key obtained from running `minid tendermint show-validator` on the second node is the public key of the Tendermint consensus engine for that node. This key is generated when you initialize the node, and it is essential for associating the validator with the specific node that will participate in the consensus process.
 
 ### Understanding the Public Key
 
@@ -32,7 +32,7 @@ The public key obtained from running `matluxchaind tendermint show-validator` on
 2. **Obtain the Tendermint Public Key**:
    On the second node, run:
    ```bash
-   matluxchaind tendermint show-validator
+   minid tendermint show-validator
    ```
    This command outputs the public key for the node's Tendermint consensus engine.
 
@@ -43,13 +43,13 @@ The public key obtained from running `matluxchaind tendermint show-validator` on
 #### 1. Initialize the Second Node
 Ensure the node is initialized and running:
 ```bash
-matluxchaind init <node-moniker> --chain-id <chain-id>
+minid init <node-moniker> --chain-id <chain-id>
 ```
 
 #### 2. Obtain the Tendermint Public Key
 Run the following command on the second node:
 ```bash
-matluxchaind tendermint show-validator
+minid tendermint show-validator
 ```
 Example output:
 ```plaintext
@@ -75,12 +75,12 @@ Use this public key when creating the validator. Here’s an example command usi
 
 **Validator Creation Command:**
 ```bash
-matluxchaind tx staking create-validator ./joiningvalidator.json --from joiningvalidator --fees 50000utctest --chain-id utctestchain --keyring-backend test
+minid tx staking create-validator ./joiningvalidator.json --from joiningvalidator --fees 50000utctest --chain-id utctestchain --keyring-backend test
 ```
 
 ### Summary
 
-- **Public Key**: The public key obtained from `matluxchaind tendermint show-validator` represents the node's identity in the Tendermint consensus process.
+- **Public Key**: The public key obtained from `minid tendermint show-validator` represents the node's identity in the Tendermint consensus process.
 - **Validator Association**: This key is used during validator creation to link the validator to the specific node.
 - **Initialization**: The node must be initialized and running to generate and retrieve the public key.
 - **Validation**: Including this public key in the validator creation process ensures that the correct node is used for consensus operations.
