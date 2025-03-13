@@ -1,3 +1,65 @@
+
+## How to install nvm
+
+To install `nvm` using Homebrew, follow these steps:
+
+### Step 1: Install `nvm`
+1. Open your terminal.
+2. Run the following command to install `nvm` via Homebrew:
+   ```sh
+   brew install nvm
+   ```
+3. After installation, you'll need to add some configuration to your `.zshrc` file to set up `nvm`. Add these lines to `.zshrc`:
+
+   ```sh
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+   ```
+
+4. To apply the changes, run:
+   ```sh
+   source ~/.zshrc
+   ```
+
+### Step 2: Use `nvm`
+Once `nvm` is set up, you can use it to install and manage different versions of Node.js:
+
+1. **Install a Specific Version of Node.js**:
+   To install a version of Node.js, use:
+   ```sh
+   nvm install <version>
+   ```
+   For example, to install Node.js version 16:
+   ```sh
+   nvm install 16
+   ```
+
+2. **Use a Specific Version of Node.js**:
+   To switch to a different version of Node.js that you have installed, use:
+   ```sh
+   nvm use <version>
+   ```
+   Example:
+   ```sh
+   nvm use 16
+   ```
+
+3. **List Installed Versions**:
+   To see all installed versions of Node.js:
+   ```sh
+   nvm list
+   ```
+
+4. **Set a Default Node.js Version**:
+   To set a default version of Node.js for your environment:
+   ```sh
+   nvm alias default <version>
+   ```
+
+### Do You Need to Install Node.js Separately?
+No, you don’t need to install Node.js separately if you use `nvm`. `nvm` allows you to install and manage different versions of Node.js, so it handles the installation for you. For each version you want to use, you can simply run `nvm install <version>`. This way, you avoid conflicts and keep everything managed by `nvm`.
+
 ## How to install npm, nodejs and n and yarn
 
 ### on Linux

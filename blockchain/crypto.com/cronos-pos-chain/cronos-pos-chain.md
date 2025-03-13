@@ -150,7 +150,7 @@ chain-maind tx slashing unjail --from node1 --chain-id crypto-org-chain-mainnet-
 For detailed information, visit the [Cronos POS Chain Docs](https://docs.cronos-pos.org/for-users/wallets/cli).
 ```
 
-
+reference:
 https://docs.cronos-pos.org/for-users/wallets/cli
 
 
@@ -206,7 +206,7 @@ Mainnet addresses start with the prefix `cro`, e.g., `cro1y8ua5laceufhqtwzyhahq0
    - Open Ledger Manager and install "Cronos PoS Chain"
 2. **Generate Address via CLI:**
    ```sh
-   ./chain-maind keys add Ledger --ledger
+   ./chain-maind keys add myledger --ledger
    ```
 3. **Verify Address:** Ensure the address displayed on Ledger matches the terminal output.
 
@@ -233,3 +233,14 @@ For detailed steps and verification, visit the [Mainnet Address Generation docum
 
 You can visit the full documentation [here](https://docs.cronos-pos.org/for-users/wallets/mainnet-address-generation).
 ```
+
+
+
+
+
+## examples
+
+
+chain-maind keys add matledger --ledger --keyring-backend test
+chain-maind query bank balances <address>
+chain-maind query bank balances <address> --chain-id crypto-org-chain-mainnet-1 --node https://cronos-pos-rpc.publicnode.com:443
