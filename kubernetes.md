@@ -197,7 +197,7 @@ By following these steps, you can locate the public IP address assigned to your 
 
 
 
-## How to setup a service for a new containr
+## How to setup a service for a new container
 
 
 
@@ -319,3 +319,76 @@ spec:
 ### Conclusion
 
 This setup will create separate services for your new deployment, exposing it on the specified node ports. This allows you to access the new deployment's services without interfering with the existing services. By applying the configuration and verifying the services, you ensure that your new pod is accessible as needed.
+
+
+
+
+-----
+
+## How do I exec into the veranalabs/faucet-aap:latest of this stateful set  ?
+
+To exec into the veranalabs/faucet-app:latest container from your StatefulSet (verana-faucet-hologram-chatbot), follow these steps:
+
+Step 1: Get the Pod name
+
+Since this is a StatefulSet with one pod (1/1), the pod name is likely:
+
+```
+verana-faucet-hologram-chatbot-0
+```
+
+You can confirm this by running:
+
+```
+kubectl get pods -n vna-testnet-1
+```
+
+Look for the pod that starts with verana-faucet-hologram-chatbot.
+
+⸻
+
+Step 2: Find the Container Name (Optional)
+
+If there are multiple containers (based on the image list, it looks like there are), check which one you want to exec into:
+
+```
+kubectl describe pod verana-faucet-hologram-chatbot-0 -n vna-testnet-1
+```
+
+This will list all container names. Look for the one using the image veranalabs/faucet-app:latest.
+
+⸻
+
+Step 3: Exec into the Container
+
+Now you can exec into the container. If it’s named faucet-app (adjust if different), run:
+
+```
+kubectl exec -it verana-faucet-hologram-chatbot-0 -n vna-testnet-1 -c faucet-app -- /bin/sh
+```
+
+
+## How to list the deployement config
+
+```
+kubectl get deployment verana-testnet-frontend-app-deployment -n vna-testnet-1 -o yaml
+```
+
+## How to create a dashboard token
+
+```
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
+
+## How to see the config of an ingress?
+
+```
+kubectl -n vna-testnet-1 describe ingress verana-testnet-frontend-ingress
+```
+
+or
+
+```
+kubectl -n vna-testnet-1 get ingress verana-testnet-frontend-ingress -o yaml
+```

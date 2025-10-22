@@ -1,0 +1,72 @@
+FROM ubuntu:20.04
+
+# Set environment variables
+ENV HOME=/root
+ENV INSTALLATION=cosmovisor
+ENV MONIKER=matlux-osmosis-node
+ENV OSMOSIS_HOME=$HOME/.osmosisd
+ENV OSMOSIS_VERSION=25.2.0
+ENV GOLANG_VERSION=1.22.3
+
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y curl bash sudo unzip git jq wget lz4
+
+# Install Go (necessary for cosmovisor)
+RUN curl -OL https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz \
+    && rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
+ENV GOPATH=/root/go
+
+RUN wget -q https://github.com/TomWright/dasel/releases/download/v1.20.0/dasel_linux_amd64 -O /usr/local/bin/dasel
+RUN chmod +x /usr/local/bin/dasel
+
+# Determine network version and download osmosisd binary
+RUN RPC_ABCI_INFO=$(curl -s --retry 5 --retry-delay 5 --connect-timeout 30 -H "Accept: application/json" https://rpc.testnet.osmosis.zone/abci_info) \
+    && NETWORK_VERSION=$(echo $RPC_ABCI_INFO | jq -r '.result.response.version') \
+    && wget https://osmosis.fra1.digitaloceanspaces.com/binaries/v${NETWORK_VERSION}/osmosisd-${NETWORK_VERSION}-linux-amd64 -O /usr/local/bin/osmosisd \
+    && chmod +x /usr/local/bin/osmosisd
+
+# # Determine network version and download osmosisd binary
+# RUN RPC_ABCI_INFO=$(curl -s --retry 5 --retry-delay 5 --connect-timeout 30 -H "Accept: application/json" https://rpc.testnet.osmosis.zone/abci_info) \
+#     && NETWORK_VERSION=$(echo $RPC_ABCI_INFO | jq -r '.result.response.version') \
+#     && wget https://github.com/osmosis-labs/osmosis/releases/download/v$NETWORK_VERSION/osmosisd-$NETWORK_VERSION-linux-amd64 -O /usr/local/bin/osmosisd \
+#     && chmod +x /usr/local/bin/osmosisd
+
+
+WORKDIR /root
+
+# Install Cosmovisor
+RUN go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+
+# Create necessary directories for Cosmovisor
+RUN mkdir -p $OSMOSIS_HOME/cosmovisor/genesis/bin \
+    && mkdir -p $OSMOSIS_HOME/cosmovisor/binaries \
+    && mkdir -p $OSMOSIS_HOME/cosmovisor/upgrades
+
+# Move the binary to the cosmovisor directories
+RUN cp /usr/local/bin/osmosisd $OSMOSIS_HOME/cosmovisor/genesis/bin/osmosisd \
+&& cp /usr/local/bin/osmosisd $OSMOSIS_HOME/cosmovisor/binaries/osmosisd-$NETWORK_VERSION
+
+# Copy the script and make it executable
+COPY join-snapshot-simplified.sh /root/join-snapshot-simplified.sh
+RUN chmod +x /root/join-snapshot-simplified.sh
+
+
+# Run the script with the necessary environment variables
+# RUN /root/join-snapshot-simplified.sh $INSTALLATION $MONIKER
+
+# Set environment variables for Cosmovisor
+ENV DAEMON_NAME=osmosisd
+ENV DAEMON_HOME=/root/.osmosisd
+ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=true
+ENV DAEMON_LOG_BUFFER_SIZE=512
+ENV DAEMON_RESTART_AFTER_UPGRADE=true
+ENV UNSAFE_SKIP_BACKUP=true
+
+# Expose necessary ports (assuming default Osmosis ports)
+EXPOSE 26656 26657
+
+# Set the entry point for cosmovisor
+CMD ["/bin/sh", "-c", "/root/join-snapshot-simplified.sh $INSTALLATION $MONIKER && osmosisd start --home /root/.osmosisd"]

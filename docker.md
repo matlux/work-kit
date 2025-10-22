@@ -105,6 +105,12 @@ docker cp $CONTAINER_ID:/root/.utctestchain /tmp/.utctestchain
 ```
 
 
+## How to display logs:
+
+```
+docker logs -f objective_shtern
+```
+
 # Docker Compose
 
 ## Compose up

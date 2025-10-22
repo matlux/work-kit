@@ -87,3 +87,69 @@ act -s OVH_S3_APPLICATION_KEY=your-key -s OVH_S3_APPLICATION_SECRET=your-secret 
 - **Runner Versions**: You can choose specific runner versions (like `ubuntu-latest` or `ubuntu-20.04`) using `--platform`.
 
 By using `act`, you can thoroughly test your GitHub Actions workflows locally before committing and pushing them to GitHub.
+
+
+### Use a deploy key in repo A so repo B can clone it and use it in the github actions
+
+
+Perfect — yes, since A is private, and you’re accessing it from another repo (B), you do need to create and configure a deploy key in GitHub.
+
+Here’s the full 🔒 SSH deploy key setup guide for your workflow to succeed:
+
+⸻
+
+✅ Step 1: Generate an SSH key pair
+
+Run this locally on your machine:
+
+ssh-keygen -t rsa -b 4096 -C "verana-gha-deploy-key" -f verana_test_harness_key
+
+You’ll get:
+	•	repo_a_key (the private key)
+	•	repo_a_key.pub (the public key)
+
+⸻
+
+✅ Step 2: Add the public key to the verana-test-harness repo
+	1.	Go to repo_a → Settings → Deploy keys
+	2.	Click “Add deploy key”
+	3.	Title: GHA access from verana-blockchain
+	4.	Paste in the contents of verana_test_harness_key.pub
+	5.	✅ Enable “Allow write access” only if the action needs to push. (Otherwise, leave it unchecked.)
+	6.	Click Save
+
+⸻
+
+✅ Step 3: Add the private key as a GitHub Secret in verana-blockchain
+	1.	Go to the verana-blockchain repo → Settings → Secrets → Actions
+	2.	Add a new secret:
+	•	Name: A_REPO_KEY
+	•	Value: paste the entire content of verana_test_harness_key
+
+⸻
+
+✅ Step 4: Update your GitHub Action to use SSH clone
+
+Instead of https://github.com/verana-labs/verana-test-harness, use the SSH form:
+
+- name: Checkout repo_a
+  uses: actions/checkout@v3
+  with:
+    repository: verana-labs/repo_a
+    ssh-key: ${{ secrets.A_REPO_KEY }}
+    path: ${{ env.REPO_A_PATH }}
+
+You no longer need to manually create the SSH directory or run ssh-keyscan — actions/checkout will handle all of that when you use the ssh-key parameter.
+
+⸻
+
+✅ Optional: Remove the manual SSH step
+
+Since you’re now using ssh-key in actions/checkout, you can remove this from your workflow:
+
+- name: Set up SSH for accessing the selected repository
+  run: |
+    mkdir -p ~/.ssh
+    echo "${{ env.A_REPO_KEY }}" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan github.com >> ~/.ssh/known_hosts

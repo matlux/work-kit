@@ -2,13 +2,25 @@
 
 # git tips
 
+## How to use a different ssh key
+
+first check
+```
+git config --get core.sshCommand
+```
+
+then set globally
+```
+git config --global core.sshCommand "ssh -i /path/to/your/private_key"
+```
+
 ## How to Git interactive merge
 
     git merge --no-commit --no-ff branch-to-merge
 
 ## Generate SSH key
 
-    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ssh-keygen -t ed25519 -C "your_email@example.com"
 
 ## Test you ssh key
 

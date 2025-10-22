@@ -1,0 +1,111 @@
+# Use an official Ubuntu as the base image
+FROM ubuntu:20.04
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    python3 \
+    wget \
+    git \
+    build-essential \
+    jq \
+    liblz4-tool \
+    aria2 \
+    nano
+
+# Install Go (necessary for cosmovisor)
+RUN curl -OL https://golang.org/dl/go1.22.3.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go1.22.3.linux-amd64.tar.gz \
+    && rm go1.22.3.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
+ENV GOPATH=/root/go
+
+WORKDIR /root
+
+# Determine network version and download osmosisd binary
+RUN RPC_ABCI_INFO=$(curl -s --retry 5 --retry-delay 5 --connect-timeout 30 -H "Accept: application/json" https://rpc.testnet.osmosis.zone/abci_info) \
+    && NETWORK_VERSION=$(echo $RPC_ABCI_INFO | jq -r '.result.response.version') \
+    && wget https://github.com/osmosis-labs/osmosis/releases/download/v$NETWORK_VERSION/osmosisd-$NETWORK_VERSION-linux-amd64 -O /usr/local/bin/osmosisd \
+    && chmod +x /usr/local/bin/osmosisd
+
+# # Download and install Osmosis using the installer
+# RUN git clone https://github.com/osmosis-labs/osmosis.git
+
+# # # Checkout the specific version
+# RUN cd osmosis \
+#     && git checkout v25.2.0 || true \
+#     && make install
+
+
+# Initialize Osmosis node
+RUN osmosisd init matlux-osmosis-node --chain-id=osmo-test-5
+
+# Configure seeds and persistent peers
+RUN sed -i 's/seeds = ""/seeds = "0f9a9c694c46bd28ad9ad6126e923993fc6c56b1@137.184.181.105:26656"/' $HOME/.osmosisd/config/config.toml \
+    && sed -i 's/persistent_peers = ""/persistent_peers = "4ab030b7fd75ed895c48bcc899b99c17a396736b@137.184.190.127:26656,3dbffa30baab16cc8597df02945dcee0aa0a4581@143.198.139.33:26656"/' $HOME/.osmosisd/config/config.toml
+
+# Install Cosmovisor
+RUN go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+
+# Create necessary directories for Cosmovisor
+RUN mkdir -p /root/.osmosisd/cosmovisor/genesis/bin \
+    && mkdir -p /root/.osmosisd/cosmovisor/upgrades
+
+# Set environment variables for Cosmovisor
+RUN echo "# Setup Cosmovisor" >> /root/.profile \
+    && echo "export DAEMON_NAME=osmosisd" >> /root/.profile \
+    && echo "export DAEMON_HOME=/root/.osmosisd" >> /root/.profile \
+    && echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=false" >> /root/.profile \
+    && echo "export DAEMON_LOG_BUFFER_SIZE=512" >> /root/.profile \
+    && echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> /root/.profile \
+    && echo "export UNSAFE_SKIP_BACKUP=true" >> /root/.profile \
+    && . /root/.profile
+
+# Download and replace the genesis file
+RUN wget -q https://genesis.testnet.osmosis.zone/genesis.json -O $HOME/.osmosisd/config/genesis.json
+
+# Copy osmosisd binary to Cosmovisor genesis folder
+RUN cp /root/go/bin/osmosisd /root/.osmosisd/cosmovisor/genesis/bin
+
+# Reset private validator file to genesis state
+RUN osmosisd tendermint unsafe-reset-all --home /root/.osmosisd
+
+# Download the latest chain data (using Pruned option as example)
+RUN URL=$(curl https://quicksync.io/osmosis.json | jq -r '.[] | select(.file=="osmotestnet-4-pruned") | select (.mirror=="Netherlands") | .url') \
+    && cd /root/.osmosisd/ \
+    && wget -O - $URL | lz4 -d | tar -xvf -
+
+# # Set up Osmosis service
+# RUN echo "[Unit]\n\
+# Description=Cosmovisor daemon\n\
+# After=network-online.target\n\
+# [Service]\n\
+# Environment=\"DAEMON_NAME=osmosisd\"\n\
+# Environment=\"DAEMON_HOME=/root/.osmosisd\"\n\
+# Environment=\"DAEMON_RESTART_AFTER_UPGRADE=true\"\n\
+# Environment=\"DAEMON_ALLOW_DOWNLOAD_BINARIES=false\"\n\
+# Environment=\"DAEMON_LOG_BUFFER_SIZE=512\"\n\
+# Environment=\"UNSAFE_SKIP_BACKUP=true\"\n\
+# User=root\n\
+# ExecStart=/root/go/bin/cosmovisor run start\n\
+# Restart=always\n\
+# RestartSec=3\n\
+# LimitNOFILE=infinity\n\
+# LimitNPROC=infinity\n\
+# [Install]\n\
+# WantedBy=multi-user.target\n" > /etc/systemd/system/cosmovisor.service
+
+# # Start and enable the cosmovisor service
+# RUN systemctl daemon-reload \
+#     && systemctl restart systemd-journald \
+#     && systemctl enable cosmovisor \
+#     && systemctl start cosmovisor
+
+# # Expose necessary ports (assuming default Osmosis ports)
+# EXPOSE 26656 26657
+
+# # Start cosmovisor
+# CMD ["cosmovisor", "run", "start"]
