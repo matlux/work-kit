@@ -42,23 +42,36 @@ veranad q auth module-accounts
 
 
 # How many tokens are delegated?
-```
+```bash
 veranad q staking delegations $USER_ACC
 ```
 
 # List all local account on the client side's keyring
-```
+```bash
 veranad keys list --keyring-backend test
 ```
 
 # Give me the tally for a proposal
-```
-veranad q gov tally 1 --output json
+```bash
+veranad q gov tally 1 --output json --node $NODE_RPC
 ```
 
 # How to check a transaction?
 
-```
+```bash
 TX_HASH=9DF2F9D35F6702A875E015825D80A26DEFADE5C47E025D612327216D2521098A
 veranad q tx $TX_HASH  --node $NODE_RPC
+```
+
+# How to query a transaction by height?
+
+```bash
+veranad q block --type=height 990976 --node $NODE_RPC
+```
+
+
+# How to query a transaction time?
+
+```bash
+veranad q block --type=height 990976 --node $NODE_RPC -o json | jq -r '.header.time' 
 ```
