@@ -137,7 +137,7 @@ signing. It is commonly used to sanity-check the consensus pubkey embedded in a 
 
 ```bash
 CHAIN_ID="vna-testnet-1"
-NODE_RPC="http://validator1.testnet.verana.network:26657"
+NODE_RPC="https://rpc.testnet.verana.network"
 VALOPER="veranavaloper1z2epxhjn6qrg0uca6j0rq7llupe3n0nlw8e6zd"
 
 veranad query staking validator "$VALOPER" \
@@ -164,7 +164,7 @@ veranad keys show validator --bech val -a --keyring-backend test
 
 ```bash
 CHAIN_ID="vna-testnet-1"
-NODE_RPC="http://validator1.testnet.verana.network:26657"
+NODE_RPC="https://rpc.testnet.verana.network"
 VALCONS="veranavalcons18z8zxdnj8mv25pn2hrkj5268f8hurj08mlggfs"
 
 veranad query slashing signing-info "$VALCONS" \
@@ -176,7 +176,7 @@ veranad query slashing signing-info "$VALCONS" \
 
 ```bash
 CHAIN_ID="vna-testnet-1"
-NODE_RPC="http://validator1.testnet.verana.network:26657"
+NODE_RPC="https://rpc.testnet.verana.network"
 VALOPER="veranavaloper1z2epxhjn6qrg0uca6j0rq7llupe3n0nlw8e6zd"
 
 # 1) Is the validator bonded / jailed / active?
@@ -202,7 +202,7 @@ journalctl -u veranad -f
 
 ```bash
 CHAIN_ID="vna-testnet-1"
-NODE_RPC="http://validator1.testnet.verana.network:26657"
+NODE_RPC="https://rpc.testnet.verana.network"
 VALCONS="veranavalcons18z8zxdnj8mv25pn2hrkj5268f8hurj08mlggfs"
 
 # Slashing params (window, min signed, jail duration)
@@ -237,7 +237,7 @@ Why it is useful:
 
 ```bash
 CHAIN_ID="vna-testnet-1"
-NODE_RPC="http://validator1.testnet.verana.network:26657"
+NODE_RPC="https://rpc.testnet.verana.network"
 VAL_KEY_NAME="validator"
 
 veranad tx slashing unjail \
