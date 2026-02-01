@@ -198,6 +198,24 @@ If any of these look wrong, check logs:
 journalctl -u veranad -f
 ```
 
+## Missed blocks + slashing params (quick view)
+
+```bash
+CHAIN_ID="vna-testnet-1"
+NODE_RPC="http://validator1.testnet.verana.network:26657"
+VALCONS="veranavalcons18z8zxdnj8mv25pn2hrkj5268f8hurj08mlggfs"
+
+# Slashing params (window, min signed, jail duration)
+veranad query slashing params --node "$NODE_RPC" --chain-id "$CHAIN_ID" -o json \
+| jq -r '.params'
+
+# Missed blocks counter and jail state
+veranad query slashing signing-info "$VALCONS" \
+  --node "$NODE_RPC" \
+  --chain-id "$CHAIN_ID" -o json \
+| jq -r '.val_signing_info.missed_blocks_counter, .val_signing_info.jailed_until'
+```
+
 ## Unjail a validator (copy/paste ready)
 
 ```bash
