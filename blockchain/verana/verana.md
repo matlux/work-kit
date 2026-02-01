@@ -145,6 +145,15 @@ veranad query staking validator "$VALOPER" \
   --chain-id "$CHAIN_ID" -o json | jq
 ```
 
+Gotcha: the response is nested under `.validator`, so jq paths must include that key:
+
+```bash
+veranad query staking validator "$VALOPER" \
+  --node "$NODE_RPC" \
+  --chain-id "$CHAIN_ID" -o json \
+| jq -r '.validator.description.moniker, .validator.status, .validator.jailed, .validator.tokens'
+```
+
 Also useful: get the valoper from a local key name:
 
 ```bash
