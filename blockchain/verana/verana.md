@@ -216,6 +216,23 @@ veranad query slashing signing-info "$VALCONS" \
 | jq -r '.val_signing_info.missed_blocks_counter, .val_signing_info.jailed_until'
 ```
 
+## List validators + map moniker -> valoper -> consensus pubkey (API)
+
+```bash
+curl -s "https://api-test.testnet.verana.network/cosmos/staking/v1beta1/validators?pagination.limit=200" \
+| jq -r '.validators[] | [.description.moniker,.operator_address,.consensus_pubkey.key] | @tsv'
+```
+
+What it does:
+- Pulls the validator set from the REST API and prints a TSV list of `moniker`, `valoper`, and `consensus_pubkey.key`
+  (base64 ed25519).
+
+Why it is useful:
+- Lets you identify a validator by its public moniker and immediately see the operator address you need for staking queries.
+- Gives you the consensus pubkey so you can derive the valcons address (via `veranad debug pubkey-raw ... -t ed25519`)
+  when troubleshooting missed blocks or preparing to unjail.
+- Handy when you only know a moniker from logs/monitoring and need the correct valoper/valcons addresses quickly.
+
 ## Unjail a validator (copy/paste ready)
 
 ```bash
