@@ -172,6 +172,32 @@ veranad query slashing signing-info "$VALCONS" \
   --chain-id "$CHAIN_ID" -o json | jq -r '.val_signing_info'
 ```
 
+## Validator status checklist (fast triage)
+
+```bash
+CHAIN_ID="vna-testnet-1"
+NODE_RPC="http://validator1.testnet.verana.network:26657"
+VALOPER="veranavaloper1z2epxhjn6qrg0uca6j0rq7llupe3n0nlw8e6zd"
+
+# 1) Is the validator bonded / jailed / active?
+veranad query staking validator "$VALOPER" \
+  --node "$NODE_RPC" \
+  --chain-id "$CHAIN_ID" -o json \
+| jq -r '.validator.status, .validator.jailed, .validator.tokens'
+
+# 2) Is the node synced and making progress?
+curl -s "$NODE_RPC/status" | jq -r '.result.sync_info.catching_up, .result.sync_info.latest_block_height'
+
+# 3) Is the node connected to peers?
+curl -s "$NODE_RPC/net_info" | jq -r '.result.n_peers'
+```
+
+If any of these look wrong, check logs:
+
+```bash
+journalctl -u veranad -f
+```
+
 ## Unjail a validator (copy/paste ready)
 
 ```bash
@@ -188,7 +214,9 @@ veranad tx slashing unjail \
   --yes
 ```
 
-Gotchas:
-- `unjail` must be signed by the operator account key (the same key used for your valoper address).
-- If `--dry-run` is used, `--from` must be a bech32 account address (key names are not accepted in simulation mode).
-- You can only unjail after the downtime window has elapsed; check signing info first.
+## Unjail prerequisites + gotchas
+
+- Unjail must be signed by the operator account key (same keypair as `verana1...` and `veranavaloper1...`).
+- You can only unjail after the downtime jail window has elapsed; check signing info first.
+- If you use `--dry-run`, `--from` must be a bech32 account address (key names are not accepted).
+- If the node is still catching up, unjail may succeed but you will keep missing blocks; ensure sync is complete first.
