@@ -75,3 +75,111 @@ veranad q block --type=height 990976 --node $NODE_RPC
 ```bash
 veranad q block --type=height 990976 --node $NODE_RPC -o json | jq -r '.header.time' 
 ```
+
+# Validator troubleshooting quick kit
+
+## The 3 validator addresses (and which keys they come from)
+
+Here are the three addresses derived from the validator key in this test
+keyring and confirmed via validator1 RPC:
+
+- Account: verana1z2epxhjn6qrg0uca6j0rq7llupe3n0nl0gjt7d
+- Valoper: veranavaloper1z2epxhjn6qrg0uca6j0rq7llupe3n0nlw8e6zd
+- Valcons: veranavalcons18z8zxdnj8mv25pn2hrkj5268f8hurj08mlggfs
+
+Key relationship (short answer):
+- Account (verana1...) and valoper (veranavaloper1...) are the same keypair, just different bech32 prefixes of the same
+  public key. They share the same private key.
+- Valcons (veranavalcons1...) is derived from the consensus keypair (ed25519), which is separate. It does not share the same
+  private key as the account/valoper.
+
+## Derive the three addresses from your local keyring / node
+
+```bash
+VAL_KEY_NAME=validator
+veranad keys show "$VAL_KEY_NAME" -a --keyring-backend test
+veranad keys show "$VAL_KEY_NAME" --bech val -a --keyring-backend test
+
+# If you are on the validator node:
+veranad tendermint show-address
+```
+
+If you are not on the validator node, you can derive the valcons from the consensus pubkey published by the chain:
+
+```bash
+API_ENDPOINT="https://api.testnet.verana.network"
+VALOPER=$(veranad keys show "$VAL_KEY_NAME" --bech val -a --keyring-backend test)
+CONS_PUBKEY_JSON=$(curl -s "$API_ENDPOINT/cosmos/staking/v1beta1/validators/$VALOPER" \
+  | jq -c '.validator.consensus_pubkey')
+HEX=$(veranad debug pubkey "$CONS_PUBKEY_JSON" | awk -F': ' '/Address:/{print $2}')
+veranad debug addr "$HEX"
+```
+
+## Understand what `veranad debug addr` does (hex -> bech32)
+
+```bash
+veranad debug addr 388E2336723ED8AA066AB8ED2A2B4749EFC1C9E7
+```
+
+This takes a hex address and prints the corresponding bech32 variants (account, valoper, valcons). Use it when a log or
+JSON object gives you a hex address and you need the human-friendly prefixes.
+
+## Validate a raw consensus pubkey (base64 + ed25519)
+
+```bash
+veranad debug pubkey-raw mUNO2bzyVU1hezYD7io7KoOayyakW4lt3RXF4S45U8c= -t ed25519
+```
+
+This converts a base64-encoded ed25519 pubkey to its address form(s) so you can verify the consensus identity used for
+signing. It is commonly used to sanity-check the consensus pubkey embedded in a gentx or returned by the staking API.
+
+## Get validator info quickly
+
+```bash
+CHAIN_ID="vna-testnet-1"
+NODE_RPC="http://validator1.testnet.verana.network:26657"
+VALOPER="veranavaloper1z2epxhjn6qrg0uca6j0rq7llupe3n0nlw8e6zd"
+
+veranad query staking validator "$VALOPER" \
+  --node "$NODE_RPC" \
+  --chain-id "$CHAIN_ID" -o json | jq
+```
+
+Also useful: get the valoper from a local key name:
+
+```bash
+veranad keys show validator --bech val -a --keyring-backend test
+```
+
+## Check if a validator is jailed + signing info (valcons)
+
+```bash
+CHAIN_ID="vna-testnet-1"
+NODE_RPC="http://validator1.testnet.verana.network:26657"
+VALCONS="veranavalcons18z8zxdnj8mv25pn2hrkj5268f8hurj08mlggfs"
+
+veranad query slashing signing-info "$VALCONS" \
+  --node "$NODE_RPC" \
+  --chain-id "$CHAIN_ID" -o json | jq -r '.val_signing_info'
+```
+
+## Unjail a validator (copy/paste ready)
+
+```bash
+CHAIN_ID="vna-testnet-1"
+NODE_RPC="http://validator1.testnet.verana.network:26657"
+VAL_KEY_NAME="validator"
+
+veranad tx slashing unjail \
+  --from "$VAL_KEY_NAME" \
+  --chain-id "$CHAIN_ID" \
+  --node "$NODE_RPC" \
+  --keyring-backend test \
+  --fees 600000uvna \
+  --yes
+```
+
+Gotchas:
+- `unjail` must be signed by the operator account key (the same key used for your valoper address).
+- If `--dry-run` is used, `--from` must be a bech32 account address (key names are not accepted in simulation mode).
+- You can only unjail after the downtime window has elapsed; check signing info first.
